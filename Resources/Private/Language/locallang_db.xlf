@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-04T10:40:24Z" product-name="kom">
+		<header/>
+		<body>
+			<trans-unit id="tx_kom_domain_model_pi1">
+				<source>Kandidat-O-Mat</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_pi1.description">
+				<source>Kandidat-O-Mat</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_electiondistrict">
+				<source>Election District</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_electiondistrict.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_electiondistrict.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_electiondistrict.elections">
+				<source>Elections</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election">
+				<source>Election</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election.theses">
+				<source>Theses</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate">
+				<source>Candidate</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.elections">
+				<source>Elections</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_thesis">
+				<source>Thesis</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_thesis.description">
+				<source>Description</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
