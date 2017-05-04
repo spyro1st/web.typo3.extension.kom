@@ -11,6 +11,10 @@ call_user_func(
             'Kandidat-O-Mat'
         );
 
+        $pluginSignature = str_replace('_', '', $extKey) . '_pi1';
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_pi1.xml');
+
 //        if (TYPO3_MODE === 'BE') {
 //
 //            \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
@@ -19,7 +23,7 @@ call_user_func(
 //                'overview', // Submodule key
 //                '', // Position
 //                [
-//                    'ElectionDistrict' => 'list, show','Election' => 'list, show',
+//                    'ElectionDistrict' => 'list, show, select','Election' => 'list, show, questionnaire',
 //                ],
 //                [
 //                    'access' => 'user,group',

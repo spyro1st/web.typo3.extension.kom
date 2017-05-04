@@ -1,3 +1,5 @@
+# noinspection SqlNoDataSourceInspectionForFile
+
 #
 # Table structure for table 'tx_kom_domain_model_electiondistrict'
 #
@@ -47,10 +49,9 @@ CREATE TABLE tx_kom_domain_model_election (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	electiondistrict int(11) unsigned DEFAULT '0' NOT NULL,
-
 	title varchar(255) DEFAULT '' NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
+	electiondistricts int(11) unsigned DEFAULT '0' NOT NULL,
 	theses int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -135,6 +136,7 @@ CREATE TABLE tx_kom_domain_model_thesis (
 
 	election int(11) unsigned DEFAULT '0' NOT NULL,
 
+	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -182,6 +184,19 @@ CREATE TABLE tx_kom_domain_model_thesis (
 
 	election int(11) unsigned DEFAULT '0' NOT NULL,
 
+);
+
+#
+# Table structure for table 'tx_kom_electiondistrict_election_mm'
+#
+CREATE TABLE tx_kom_electiondistrict_election_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );
 
 #

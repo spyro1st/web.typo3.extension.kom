@@ -17,4 +17,12 @@ namespace DigitalPatrioten\Kom\Domain\Repository;
  */
 class ElectionDistrictRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    public function findByActiveElection() {
+        $currentDate = new \DateTime();
+        $query = $this->createQuery();
+        $query->matching(
+            $query->greaterThanOrEqual('elections.date', $currentDate)
+        );
+        return $query->execute();
     }
+}

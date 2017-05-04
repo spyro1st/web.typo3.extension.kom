@@ -1,4 +1,3 @@
-
 plugin.tx_kom_pi1 {
   view {
     templateRootPaths.0 = EXT:kom/Resources/Private/Templates/

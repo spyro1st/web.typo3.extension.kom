@@ -46,4 +46,15 @@ class ElectionDistrictController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     {
         $this->view->assign('electionDistrict', $electionDistrict);
     }
+
+    /**
+     * action select
+     *
+     * @return void
+     */
+    public function selectAction()
+    {
+        $electionDistricts = $this->electionDistrictRepository->findByActiveElection();
+        $this->view->assign('electionDistricts', $electionDistricts);
+    }
 }

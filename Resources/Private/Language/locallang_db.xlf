@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-04T10:40:24Z" product-name="kom">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-04T12:07:16Z" product-name="kom">
 		<header/>
 		<body>
 			<trans-unit id="tx_kom_domain_model_pi1">
@@ -33,6 +33,9 @@
 			<trans-unit id="tx_kom_domain_model_election.theses">
 				<source>Theses</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election.electiondistricts">
+				<source>Elections Districts</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate">
 				<source>Candidate</source>
 			</trans-unit>
@@ -53,6 +56,9 @@
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis">
 				<source>Thesis</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_thesis.title">
+				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis.description">
 				<source>Description</source>

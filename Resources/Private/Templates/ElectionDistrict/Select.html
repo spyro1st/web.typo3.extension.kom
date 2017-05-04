@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<div class="row">
+		<div class="col-12 text-center text-uppercase">
+			<div class="row justify-content-center mb-3">
+				<div class="col-4 col-md-2">
+					<f:image
+						class="img-fluid"
+						src="EXT:theme_kom/Resources/Public/Images/Frontend/logo-kom.png"
+						alt="{f:translate(key:'LLL:EXT:theme_kom/Resources/Private/Language/locallang.xlf:header.logo.alttext')}"
+					/>
+				</div>
+			</div>
+			<h1>
+				<f:translate key="LLL:EXT:theme_kom/Resources/Private/Language/locallang.xlf:header.logo.sitename"/>
+			</h1>
+			<small>Lorem Ipsum Dolor sit amet</small>
+		</div>
+	</div>
+	
+	<f:form pageUid="2" action="questionnaire" controller="Election" class="mt-4">
+		<div class="form-group row justify-content-center">
+			<div class="col-12 col-lg-6">
+				<div class="select-wrap">
+					<f:form.select  additionalAttributes="{onchange: 'this.form.submit();'}" name="electionDistrict" class="form-control" options="{electionDistricts}" optionLabelField="title" prependOptionLabel="Wahlkreis wählen" prependOptionValue=""></f:form.select>
+				</div>
+			</div>
+		</div>
+	</f:form>
+</f:section>
+</html>

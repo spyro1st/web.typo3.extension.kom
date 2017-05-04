@@ -2,46 +2,46 @@
 return [
     'ctrl' => [
         'title'	=> 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_thesis',
-        'label' => 'description',
+        'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-		'versioningWS' => true,
+        'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
-		'delete' => 'deleted',
-		'enablecolumns' => [
+        'delete' => 'deleted',
+        'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'description',
+        'searchFields' => 'title,description',
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_thesis.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, description',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description',
     ],
     'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, description, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
-		'sys_language_uid' => [
-			'exclude' => true,
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-			'config' => [
-				'type' => 'select',
-				'renderType' => 'selectSingle',
-				'special' => 'languages',
-				'items' => [
-					[
-						'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
-						-1,
-						'flags-multiple'
-					]
-				],
-				'default' => 0,
-			],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'special' => 'languages',
+                'items' => [
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ]
+                ],
+                'default' => 0,
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -62,7 +62,7 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-		't3ver_label' => [
+        't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'input',
@@ -70,7 +70,7 @@ return [
                 'max' => 255,
             ],
         ],
-		'hidden' => [
+        'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
@@ -82,7 +82,7 @@ return [
                 ],
             ],
         ],
-		'starttime' => [
+        'starttime' => [
             'exclude' => true,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
@@ -107,17 +107,26 @@ return [
                 ]
             ],
         ],
+        'title' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_thesis.title',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
         'description' => [
-	        'exclude' => true,
-	        'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_thesis.description',
-	        'config' => [
-			    'type' => 'text',
-			    'cols' => 40,
-			    'rows' => 15,
-			    'eval' => 'trim',
-			],
-	        'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-	    ],
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_thesis.description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
+        ],
         'election' => [
             'config' => [
                 'type' => 'passthrough',

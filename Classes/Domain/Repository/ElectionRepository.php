@@ -12,9 +12,34 @@ namespace DigitalPatrioten\Kom\Domain\Repository;
  *
  ***/
 
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * The repository for Elections
  */
+
 class ElectionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    /**
+     * @param \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict
+     * 
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findFirstActiveByElectionDistrict(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict) {
+        $currentDate = new \DateTime();
+        $query = $this->createQuery();
+        $query->matching(
+            $query->logicalAnd(
+                $query->greaterThanOrEqual('date', $currentDate),
+                $query->contains('electiondistricts', $electionDistrict)
+            )
+        );
+        $result = $query->setLimit(1)->execute();
+
+        if ($result instanceof QueryResultInterface) {
+            return $result->getFirst();
+        } elseif (is_array($result)) {
+            return isset($result[0]) ? $result[0] : null;
+        }
     }
+}

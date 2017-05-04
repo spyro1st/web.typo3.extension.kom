@@ -6,42 +6,42 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-		'versioningWS' => true,
+        'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
-		'delete' => 'deleted',
-		'enablecolumns' => [
+        'delete' => 'deleted',
+        'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,date,theses',
+        'searchFields' => 'title,date,electiondistricts,theses',
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, theses',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, theses',
     ],
     'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, theses, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, theses, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
-		'sys_language_uid' => [
-			'exclude' => true,
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-			'config' => [
-				'type' => 'select',
-				'renderType' => 'selectSingle',
-				'special' => 'languages',
-				'items' => [
-					[
-						'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
-						-1,
-						'flags-multiple'
-					]
-				],
-				'default' => 0,
-			],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'special' => 'languages',
+                'items' => [
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ]
+                ],
+                'default' => 0,
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -62,7 +62,7 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-		't3ver_label' => [
+        't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'input',
@@ -70,7 +70,7 @@ return [
                 'max' => 255,
             ],
         ],
-		'hidden' => [
+        'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
@@ -82,7 +82,7 @@ return [
                 ],
             ],
         ],
-		'starttime' => [
+        'starttime' => [
             'exclude' => true,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
@@ -108,44 +108,80 @@ return [
             ],
         ],
         'title' => [
-	        'exclude' => true,
-	        'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.title',
-	        'config' => [
-			    'type' => 'input',
-			    'size' => 30,
-			    'eval' => 'trim'
-			],
-	    ],
-	    'date' => [
-	        'exclude' => true,
-	        'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.date',
-	        'config' => [
-			    'type' => 'input',
-			    'size' => 7,
-			    'eval' => 'date',
-			    'default' => time()
-			],
-	    ],
-	    'theses' => [
-	        'exclude' => true,
-	        'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.theses',
-	        'config' => [
-			    'type' => 'inline',
-			    'foreign_table' => 'tx_kom_domain_model_thesis',
-			    'foreign_field' => 'election',
-			    'maxitems' => 9999,
-			    'appearance' => [
-			        'collapseAll' => 0,
-			        'levelLinksPosition' => 'top',
-			        'showSynchronizationLink' => 1,
-			        'showPossibleLocalizationRecords' => 1,
-			        'showAllLocalizationLink' => 1
-			    ],
-			],
-	    ],
-        'electiondistrict' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.title',
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'date' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.date',
+            'config' => [
+                'type' => 'input',
+                'size' => 7,
+                'eval' => 'date',
+                'default' => time()
+            ],
+        ],
+        'theses' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.theses',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_kom_domain_model_thesis',
+                'foreign_field' => 'election',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 0,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
+        ],
+        'electiondistricts' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.electiondistricts',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_kom_domain_model_electiondistrict',
+                'MM' => 'tx_kom_electiondistrict_election_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+                'wizards' => [
+                    '_PADDING' => 1,
+                    '_VERTICAL' => 1,
+                    'edit' => [
+                        'module' => [
+                            'name' => 'wizard_edit',
+                        ],
+                        'type' => 'popup',
+                        'title' => 'Edit', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.edit
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
+                        'popup_onlyOpenIfSelected' => 1,
+                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+                    ],
+                    'add' => [
+                        'module' => [
+                            'name' => 'wizard_add',
+                        ],
+                        'type' => 'script',
+                        'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
+                        'params' => [
+                            'table' => 'tx_kom_domain_model_electiondistrict',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ],
+                    ],
+                ],
             ],
         ],
     ],

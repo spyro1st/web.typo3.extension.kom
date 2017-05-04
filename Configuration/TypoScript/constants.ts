@@ -10,7 +10,7 @@ plugin.tx_kom_pi1 {
   }
   persistence {
     # cat=plugin.tx_kom_pi1//a; type=string; label=Default storage PID
-    storagePid =
+    storagePid = 3
   }
 }
 
@@ -25,6 +25,6 @@ module.tx_kom_overview {
   }
   persistence {
     # cat=module.tx_kom_overview//a; type=string; label=Default storage PID
-    storagePid =
+    storagePid = 3
   }
 }
