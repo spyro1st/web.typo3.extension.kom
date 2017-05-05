@@ -51,16 +51,18 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action questionnaire
      *
      * @param \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict
+     * @param int $step
      * @return void
      */
-    public function questionnaireAction(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict)
+    public function questionnaireAction(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict, $step = 0)
     {
         $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
         $this->view->assignMultiple(
-            array(
+            [
                 'electionDistrict' => $electionDistrict,
-                'election' => $election
-            )
+                'election' => $election,
+                'step' => $step
+            ]
         );
     }
 }

@@ -3,6 +3,8 @@ return [
     'ctrl' => [
         'title'	=> 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_candidate_thesis_mm',
         'label' => 'uid_local',
+        'label_alt' => 'uid_foreign',
+        'label_alt_force' => 1,
         'iconfile' => 'EXT:kom/Resources/Public/Icons/relation.gif'
     ],
     'interface' => [

@@ -2,9 +2,24 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-	<h1>Single View for Election</h1>
 
 	<f:flashMessages/>
-	<f:render partial="Election/Properties" arguments="{election:election}"/>
+	<f:if condition="{step} == 0">
+		<f:then>
+			<h1>Willkommen beim Kandidat-O-Mat</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.
+			</p>
+			<f:link.action action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary">
+				Jetzt starten
+				<i class="fi flaticon-arrow2-o"></i>
+			</f:link.action>
+		</f:then>
+		<f:else>
+			{step} / <f:count>{election.theses}</f:count>
+			<f:render partial="Election/Properties" arguments="{election:election}"/>
+			<f:render partial="Thesis/Properties" arguments="{election:election, step: step}"/>
+		</f:else>
+	</f:if>
 </f:section>
 </html>
