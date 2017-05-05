@@ -48,6 +48,9 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_kom_domain_model_thesis', 'EXT:kom/Resources/Private/Language/locallang_csh_tx_kom_domain_model_thesis.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_kom_domain_model_thesis');
 
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_kom_domain_model_thesis', 'EXT:kom/Resources/Private/Language/locallang_csh_tx_kom_candidate_thesis_mm.xlf');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_kom_candidate_thesis_mm');
+
     },
     $_EXTKEY
 );

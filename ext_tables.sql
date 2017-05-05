@@ -96,6 +96,7 @@ CREATE TABLE tx_kom_domain_model_candidate (
 	last_name varchar(255) DEFAULT '' NOT NULL,
 	image int(11) unsigned NOT NULL default '0',
 	elections int(11) unsigned DEFAULT '0' NOT NULL,
+	opinions int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -208,6 +209,25 @@ CREATE TABLE tx_kom_candidate_election_mm (
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_kom_candidate_thesis_mm'
+#
+CREATE TABLE tx_kom_candidate_thesis_mm (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	opinion tinytext NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );

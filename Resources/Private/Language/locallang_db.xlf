@@ -54,6 +54,9 @@
 			<trans-unit id="tx_kom_domain_model_candidate.elections">
 				<source>Elections</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.opinions">
+				<source>Opinions</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis">
 				<source>Thesis</source>
 			</trans-unit>
@@ -62,6 +65,12 @@
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis.description">
 				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_candidate_thesis_mm">
+				<source>Opinion</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_candidate_thesis_mm.opinion">
+				<source>Opinion</source>
 			</trans-unit>
 		</body>
 	</file>

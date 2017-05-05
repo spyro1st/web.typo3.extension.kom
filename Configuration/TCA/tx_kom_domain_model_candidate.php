@@ -2,7 +2,9 @@
 return [
     'ctrl' => [
         'title'	=> 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_candidate',
-        'label' => 'title',
+        'label' => 'last_name',
+        'label_alt' => 'first_name, title',
+        'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -20,10 +22,10 @@ return [
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_candidate.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections, opinions',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections, opinions, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -219,6 +221,20 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+        'opinions' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_candidate.opinions',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_kom_candidate_thesis_mm',
+                'foreign_field' => 'uid_foreign',
+                'foreign_label' => 'uid_local',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ]
             ],
         ],
     ],
