@@ -18,7 +18,7 @@
 		<f:else>
 			{step} / <f:count>{thesesMappings.theses}</f:count>
 			<!--<f:render partial="Election/Properties" arguments="{election:election}"/>-->
-			<f:render partial="Thesis/Properties" arguments="{theses:thesesMappings.theses, step: step}"/>
+			<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step}"/>
 		</f:else>
 	</f:if>
 </f:section>

@@ -78,6 +78,24 @@
 			<trans-unit id="tx_kom_electiondistrict_election_mm.theses">
 				<source>Theses</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_result">
+				<source>Result</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_result.election_distric">
+				<source>Election Distric</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_result.election">
+				<source>Election</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_result.opinions">
+				<source>Opinions</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_result_thesis_mm">
+				<source>Result Mapping</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_result_thesis_mm.opinion">
+				<source>Opinion</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

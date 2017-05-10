@@ -53,6 +53,9 @@ call_user_func(
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_kom_electiondistrict_election_mm', 'EXT:kom/Resources/Private/Language/locallang_csh_tx_kom_electiondistrict_election_mm.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_kom_electiondistrict_election_mm');
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_kom_domain_model_result', 'EXT:kom/Resources/Private/Language/locallang_csh_tx_kom_domain_model_result.xlf');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_kom_domain_model_result');
     },
     $_EXTKEY
 );

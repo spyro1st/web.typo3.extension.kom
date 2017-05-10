@@ -16,6 +16,11 @@ plugin.tx_kom {
           tableName = tx_kom_electiondistrict_election_mm
         }
       }
+      DigitalPatrioten\Kom\Domain\Model\ResultOpinion {
+        mapping {
+          tableName = tx_kom_result_thesis_mm
+        }
+      }
     }
   }
   features {

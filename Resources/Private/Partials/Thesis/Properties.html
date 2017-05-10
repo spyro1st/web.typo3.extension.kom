@@ -1,4 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:debug>{result}</f:debug>
 	<f:for each="{theses}" as="thesis" iteration="iterator">
 		<f:if condition="{iterator.cycle} == {step}">
 			<div class="row mb-3">
@@ -13,12 +14,17 @@
 				<div class="col-12">
 					<div class="row">
 						<div class="col-12 col-sm-6 d-flex">
-							<button class="btn btn-lg btn-block btn-secondary">
+							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
+								<f:form.hidden name="step" value="{step + 1}" />
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{electionDistrict}" />
+								<f:form.hidden name="result[opinions][{step}][uidForeign]" value="{election}" />
+								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									ich stimme zu
 									<i class="fi flaticon-check float-right"></i>
 								</span>
-							</button>
+								</f:form.button>
+							</f:form>
 						</div>
 						<div class="col-12 col-sm-6 mt-3 mt-sm-0">
 							<button class="btn btn-lg btn-block btn-secondary">

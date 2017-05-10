@@ -9,31 +9,28 @@ namespace DigitalPatrioten\Kom\Domain\Model;
  ***/
 
 /**
- * ThesisMapping
+ * Thesis
  */
-class ElectiondistrictElectionMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * ElectionDistrict
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
      */
     protected $uidLocal = null;
 
     /**
      * Election
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result>
      */
     protected $uidForeign = null;
 
     /**
-     * Theses
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
+     * opinion
+     * @var int
      */
-    protected $theses = null;
+    protected $opinion = 0;
 
-    /**
-     * __construct
-     */
     public function __construct() {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
@@ -49,49 +46,67 @@ class ElectiondistrictElectionMapping extends \TYPO3\CMS\Extbase\DomainObject\Ab
     protected function initStorageObjects() {
         $this->uidLocal = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->uidForeign = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->theses = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
      */
     public function getUidLocal() {
         return $this->uidLocal;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict> $uidLocal
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis> $uidLocal
      */
     public function setUidLocal(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $uidLocal) {
         $this->uidLocal = $uidLocal;
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result>
      */
     public function getUidForeign() {
         return $this->uidForeign;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election> $uidForeign
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result> $uidForeign
      */
     public function setUidForeign(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $uidForeign) {
         $this->uidForeign = $uidForeign;
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
+     * Returns the opinion
+     * @return int $opinion
      */
-    public function getTheses() {
-        return $this->theses;
+    public function getOpinion() {
+        return $this->opinion;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis> $theses
+     * Sets the opinion
+     *
+     * @param int $opinion
+     *
+     * @return void
      */
-    public function setTheses(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $theses) {
-        $this->theses = $theses;
+    public function setOpinion($opinion) {
+        $this->opinion = $opinion;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ThesisMapping> $thesesmappings
+     */
+    public function getThesesmappings() {
+        return $this->thesesmappings;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ThesisMapping> $thesesmappings
+     */
+    public function setThesesmappings(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $thesesmappings) {
+        $this->thesesmappings = $thesesmappings;
     }
 
 }

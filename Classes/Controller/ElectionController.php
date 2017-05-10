@@ -2,45 +2,42 @@
 namespace DigitalPatrioten\Kom\Controller;
 
 /***
- *
  * This file is part of the "Kandidat-O-Mat" Extension for TYPO3 CMS.
- *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
  *  (c) 2017 Kevin Ulrich Moschallski <info@digitalpatrioten.com>, DigitalPatrioten AG
- *
  ***/
 
 /**
  * ElectionController
  */
-class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
-{
+class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+
+    /**
+     * Object Manager
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     */
+    protected $objectManager;
+
     /**
      * electionRepository
-     *
      * @var \DigitalPatrioten\Kom\Domain\Repository\ElectionRepository
      * @inject
      */
-    protected $electionRepository = null;
+    protected $electionRepository = NULL;
 
     /**
      * thesisRepository
-     *
      * @var \DigitalPatrioten\Kom\Domain\Repository\ElectiondistrictElectionMappingRepository
      * @inject
      */
-    protected $electiondistrictElectionMappingRepository = null;
-
+    protected $electiondistrictElectionMappingRepository = NULL;
 
     /**
      * action list
-     *
      * @return void
      */
-    public function listAction()
-    {
+    public function listAction() {
         $elections = $this->electionRepository->findAll();
         $this->view->assign('elections', $elections);
     }
@@ -49,37 +46,40 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action show
      *
      * @param \DigitalPatrioten\Kom\Domain\Model\Election $election
+     *
      * @return void
      */
-    public function showAction(\DigitalPatrioten\Kom\Domain\Model\Election $election)
-    {
+    public function showAction(\DigitalPatrioten\Kom\Domain\Model\Election $election) {
         $this->view->assign('election', $election);
-    }
-
-    public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = FALSE){
-        $GLOBALS['TYPO3_DB']->debugOutput = 2;
-        if($explainOutput){
-            $GLOBALS['TYPO3_DB']->explainOutput = true;
-        }
-        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
-        $queryResult->toArray();
-        DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
-
-        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = false;
-        $GLOBALS['TYPO3_DB']->explainOutput = false;
-        $GLOBALS['TYPO3_DB']->debugOutput = false;
     }
 
     /**
      * action questionnaire
      *
      * @param \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict
+     * @param \DigitalPatrioten\Kom\Domain\Model\Election $election
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
      * @param int $step
+     *
      * @return void
      */
-    public function questionnaireAction(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict, $step = 0)
-    {
-        $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
+    public function questionnaireAction(
+        \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict,
+        \DigitalPatrioten\Kom\Domain\Model\Election $election = null,
+        \DigitalPatrioten\Kom\Domain\Model\Result $result = NULL,
+        $step = 0
+    ) {
+        if (!$election) {
+            $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
+        }
+
+        if (!$result) {
+            /* @var \DigitalPatrioten\Kom\Domain\Model\Result $result */
+            $result = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
+            $result->setElection($election);
+            $result->setElectionDistrict($electionDistrict);
+        }
+        
         $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
 
         $this->view->assignMultiple(
@@ -87,6 +87,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 'electionDistrict' => $electionDistrict,
                 'election' => $election,
                 'thesesMappings' => $thesesMappings,
+                'result' => $result,
                 'step' => $step
             ]
         );
