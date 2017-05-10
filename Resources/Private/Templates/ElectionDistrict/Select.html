@@ -20,11 +20,11 @@
 		</div>
 	</div>
 	
-	<f:form pageUid="2" action="questionnaire" controller="Election" class="mt-4">
+	<f:form method="GET" pageUid="2" action="questionnaire" controller="Election" class="mt-4">
 		<div class="form-group row justify-content-center">
 			<div class="col-12 col-lg-6">
 				<div class="select-wrap">
-					<f:form.select  additionalAttributes="{onchange: 'this.form.submit();'}" name="electionDistrict" class="form-control" options="{electionDistricts}" optionLabelField="title" prependOptionLabel="Wahlkreis wählen" prependOptionValue=""></f:form.select>
+					<f:form.select additionalAttributes="{onchange: 'this.form.submit();'}" name="electionDistrict" class="form-control" options="{electionDistricts}" optionLabelField="title" prependOptionLabel="Wahlkreis wählen" prependOptionValue=""></f:form.select>
 				</div>
 			</div>
 		</div>
