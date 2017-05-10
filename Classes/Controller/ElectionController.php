@@ -26,6 +26,15 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     protected $electionRepository = null;
 
     /**
+     * thesisRepository
+     *
+     * @var \DigitalPatrioten\Kom\Domain\Repository\ElectiondistrictElectionMappingRepository
+     * @inject
+     */
+    protected $electiondistrictElectionMappingRepository = null;
+
+
+    /**
      * action list
      *
      * @return void
@@ -47,6 +56,20 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $this->view->assign('election', $election);
     }
 
+    public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = FALSE){
+        $GLOBALS['TYPO3_DB']->debugOutput = 2;
+        if($explainOutput){
+            $GLOBALS['TYPO3_DB']->explainOutput = true;
+        }
+        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
+        $queryResult->toArray();
+        DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
+
+        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = false;
+        $GLOBALS['TYPO3_DB']->explainOutput = false;
+        $GLOBALS['TYPO3_DB']->debugOutput = false;
+    }
+
     /**
      * action questionnaire
      *
@@ -57,10 +80,13 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     public function questionnaireAction(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict, $step = 0)
     {
         $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
+        $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
+
         $this->view->assignMultiple(
             [
                 'electionDistrict' => $electionDistrict,
                 'election' => $election,
+                'thesesMappings' => $thesesMappings,
                 'step' => $step
             ]
         );

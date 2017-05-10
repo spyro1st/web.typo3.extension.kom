@@ -52,7 +52,6 @@ CREATE TABLE tx_kom_domain_model_election (
 	title varchar(255) DEFAULT '' NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
 	electiondistricts int(11) unsigned DEFAULT '0' NOT NULL,
-	theses int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -191,11 +190,35 @@ CREATE TABLE tx_kom_domain_model_thesis (
 # Table structure for table 'tx_kom_electiondistrict_election_mm'
 #
 CREATE TABLE tx_kom_electiondistrict_election_mm (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	theses int(11) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_kom_electiondistrictelection_thesis_mm'
+#
+CREATE TABLE tx_kom_electiondistrictelection_thesis_mm (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
+	PRIMARY KEY (uid),
+	KEY parent (pid),
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );

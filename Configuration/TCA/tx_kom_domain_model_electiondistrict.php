@@ -20,10 +20,10 @@ return [
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_electiondistrict.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, elections',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, elections, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -131,10 +131,8 @@ return [
             'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_electiondistrict.elections',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_kom_domain_model_election',
                 'MM' => 'tx_kom_electiondistrict_election_mm',
-                'MM_opposite_field' => 'electiondistricts',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,

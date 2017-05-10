@@ -16,9 +16,9 @@
 			</f:link.action>
 		</f:then>
 		<f:else>
-			{step} / <f:count>{election.theses}</f:count>
-			<f:render partial="Election/Properties" arguments="{election:election}"/>
-			<f:render partial="Thesis/Properties" arguments="{election:election, step: step}"/>
+			{step} / <f:count>{thesesMappings.theses}</f:count>
+			<!--<f:render partial="Election/Properties" arguments="{election:election}"/>-->
+			<f:render partial="Thesis/Properties" arguments="{theses:thesesMappings.theses, step: step}"/>
 		</f:else>
 	</f:if>
 </f:section>

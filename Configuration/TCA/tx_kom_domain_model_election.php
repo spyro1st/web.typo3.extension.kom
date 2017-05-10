@@ -16,14 +16,14 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,date,electiondistricts,theses',
+        'searchFields' => 'title,date,electiondistricts',
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, theses',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, theses, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -126,23 +126,6 @@ return [
                 'default' => time()
             ],
         ],
-        'theses' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.theses',
-            'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_kom_domain_model_thesis',
-                'foreign_field' => 'election',
-                'maxitems' => 9999,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
-                ],
-            ],
-        ],
         'electiondistricts' => [
             'exclude' => true,
             'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.electiondistricts',
@@ -151,6 +134,7 @@ return [
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_kom_domain_model_electiondistrict',
                 'MM' => 'tx_kom_electiondistrict_election_mm',
+                'MM_opposite_field' => 'elections',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,

@@ -231,9 +231,14 @@ return [
                 'foreign_table' => 'tx_kom_candidate_thesis_mm',
                 'foreign_field' => 'uid_foreign',
                 'foreign_label' => 'uid_local',
+                'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => true,
-                    'expandSingle' => true,
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1
                 ]
             ],
         ],

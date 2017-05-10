@@ -1,4 +1,4 @@
-plugin.tx_kom_pi1 {
+plugin.tx_kom {
   view {
     templateRootPaths.0 = EXT:kom/Resources/Private/Templates/
     templateRootPaths.1 = {$plugin.tx_kom_pi1.view.templateRootPath}
@@ -10,6 +10,13 @@ plugin.tx_kom_pi1 {
   persistence {
     storagePid = {$plugin.tx_kom_pi1.persistence.storagePid}
     #recursive = 1
+    classes {
+      DigitalPatrioten\Kom\Domain\Model\ElectiondistrictElectionMapping {
+        mapping {
+          tableName = tx_kom_electiondistrict_election_mm
+        }
+      }
+    }
   }
   features {
     #skipDefaultArguments = 1
