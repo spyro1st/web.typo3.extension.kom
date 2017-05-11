@@ -8,6 +8,8 @@ namespace DigitalPatrioten\Kom\Controller;
  *  (c) 2017 Kevin Ulrich Moschallski <info@digitalpatrioten.com>, DigitalPatrioten AG
  ***/
 
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+
 /**
  * ElectionController
  */
@@ -17,7 +19,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * Session storage key used
      * @var string
      */
-    protected $sessionDataStorageKey;
+    protected $sessionDataStorageKey = 'tx_kom_questionnaire_form';
 
     /**
      * The session data container
@@ -69,11 +71,32 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     protected $electionRepository = NULL;
 
     /**
+     * electionDistrictRepository
+     * @var \DigitalPatrioten\Kom\Domain\Repository\ElectionDistrictRepository
+     * @inject
+     */
+    protected $electionDistrictRepository = NULL;
+
+    /**
+     * thesisRepository
+     * @var \DigitalPatrioten\Kom\Domain\Repository\ThesisRepository
+     * @inject
+     */
+    protected $thesisRepository = NULL;
+
+    /**
      * thesisRepository
      * @var \DigitalPatrioten\Kom\Domain\Repository\ElectiondistrictElectionMappingRepository
      * @inject
      */
     protected $electiondistrictElectionMappingRepository = NULL;
+
+    /**
+     * resultRepository
+     * @var \DigitalPatrioten\Kom\Domain\Repository\ResultRepository
+     * @inject
+     */
+    protected $resultRepository = NULL;
 
     /**
      * action list
@@ -112,17 +135,8 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         foreach ($this->arguments->getArgumentNames() as $argumentName) {
             if (array_key_exists($argumentName, $requestArguments)) {
                 $this->formData[$argumentName] = $requestArguments[$argumentName];
-            } else {
-                if (array_key_exists($argumentName, $this->formData)) {
-                    $requestArguments[$argumentName] = (String)$this->formData[$argumentName];
-                    $_POST['tx_' . strtolower($this->extensionName) .
-                    '_' . strtolower($this->request->getPluginName())][$argumentName] =
-                        (String)$this->formData[$argumentName];
-                }
             }
         }
-
-        $this->request->setArguments($requestArguments);
 
         $this->storeSessionData();
     }
@@ -154,7 +168,13 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @return void
      */
     protected function storeSessionData() {
-        $this->sessionData['formData'] = $this->formData;
+        $oldSessionData = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->sessionDataStorageKey);
+        if ($oldSessionData['formData'] && $this->formData) {
+            ArrayUtility::mergeRecursiveWithOverrule($oldSessionData['formData'], $this->formData);
+            $this->sessionData['formData'] = $oldSessionData['formData'];
+        } else {
+            $this->sessionData['formData'] = $this->formData;
+        }
         $this->sessionData['passedActionMethodNames'] = $this->passedActionMethodNames;
 
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->sessionDataStorageKey,
@@ -201,14 +221,66 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
 
+        $totalSteps = $thesesMappings->getTheses()->count();
+
+        if ($step === ($totalSteps + 1)) {
+            $this->persistResultObject();
+        }
+
         $this->view->assignMultiple(
             [
                 'electionDistrict' => $electionDistrict,
                 'election' => $election,
                 'thesesMappings' => $thesesMappings,
                 'result' => $result,
-                'step' => $step
+                'step' => $step,
+                'totalSteps' => $totalSteps
             ]
         );
+    }
+
+    /**
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
+     *
+     * @return void
+     */
+    public function emphasizeAction(\DigitalPatrioten\Kom\Domain\Model\Result $result) {
+        $this->view->assignMultiple(
+            [
+                'result' => $result
+            ]
+        );
+    }
+
+    /**
+     * persists the result object from session
+     */
+    private function persistResultObject() {
+        $resultData = $this->sessionData['formData'];
+
+        /* @var \DigitalPatrioten\Kom\Domain\Model\Result $resultObject */
+        $resultObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
+        
+        $resultObject->setElection($this->electionRepository->findByUid($resultData['election']));
+        $resultObject->setElectionDistrict($this->electionDistrictRepository->findByUid($resultData['electionDistrict']));
+
+        foreach ($resultData['result']['opinions'] as $opinion) {
+            /* @var \DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinionObject */
+            $opinionObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\ResultOpinion');
+            $opinionObject->setUidLocal($this->thesisRepository->findByUid($opinion['uidLocal']));
+            $opinionObject->setUidForeign($resultObject);
+            $opinionObject->setOpinion($opinion['opinion']);
+            
+            $resultObject->addOpinion($opinionObject);
+        }
+        
+        $this->resultRepository->add($resultObject);
+
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
+        $persistenceManager->persistAll();
+        
+        $this->clearSessionData();
+        
+        $this->redirect('emphasize', null, null, ['result' => $resultObject]);
     }
 }

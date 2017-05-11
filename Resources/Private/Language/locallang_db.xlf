@@ -72,6 +72,9 @@
 			<trans-unit id="tx_kom_candidate_thesis_mm.opinion">
 				<source>Opinion</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_candidate_thesis_mm.explanation">
+				<source>Explanation</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_electiondistrict_election_mm">
 				<source>Theses Mapping</source>
 			</trans-unit>
@@ -95,6 +98,12 @@
 			</trans-unit>
 			<trans-unit id="tx_kom_result_thesis_mm.opinion">
 				<source>Opinion</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_result_thesis_mm.emphasize">
+				<source>Emphasize</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_result_thesis_mm.emphasize.enable">
+				<source>Emphasize</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -15,13 +15,13 @@ class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * ElectionDistrict
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
+     * @var \DigitalPatrioten\Kom\Domain\Model\Thesis
      */
     protected $uidLocal = null;
 
     /**
      * Election
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result>
+     * @var \DigitalPatrioten\Kom\Domain\Model\Result
      */
     protected $uidForeign = null;
 
@@ -30,6 +30,12 @@ class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @var int
      */
     protected $opinion = 0;
+
+    /**
+     * emphasize
+     * @var bool
+     */
+    protected $emphasize = false;
 
     public function __construct() {
         //Do not remove the next line: It would break the functionality
@@ -44,35 +50,33 @@ class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @return void
      */
     protected function initStorageObjects() {
-        $this->uidLocal = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->uidForeign = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis>
+     * @return \DigitalPatrioten\Kom\Domain\Model\Thesis
      */
     public function getUidLocal() {
         return $this->uidLocal;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Thesis> $uidLocal
+     * @param \DigitalPatrioten\Kom\Domain\Model\Thesis $uidLocal
      */
-    public function setUidLocal(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $uidLocal) {
+    public function setUidLocal(\DigitalPatrioten\Kom\Domain\Model\Thesis $uidLocal) {
         $this->uidLocal = $uidLocal;
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result>
+     * @return \DigitalPatrioten\Kom\Domain\Model\Result
      */
     public function getUidForeign() {
         return $this->uidForeign;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Result> $uidForeign
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $uidForeign
      */
-    public function setUidForeign(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $uidForeign) {
+    public function setUidForeign(\DigitalPatrioten\Kom\Domain\Model\Result $uidForeign) {
         $this->uidForeign = $uidForeign;
     }
 
@@ -93,6 +97,20 @@ class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setOpinion($opinion) {
         $this->opinion = $opinion;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmphasize() {
+        return $this->emphasize;
+    }
+
+    /**
+     * @param bool $emphasize
+     */
+    public function setEmphasize($emphasize) {
+        $this->emphasize = $emphasize;
     }
 
     /**

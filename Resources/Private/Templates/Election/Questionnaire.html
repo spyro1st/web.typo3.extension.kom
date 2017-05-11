@@ -16,7 +16,7 @@
 			</f:link.action>
 		</f:then>
 		<f:else>
-			{step} / <f:count>{thesesMappings.theses}</f:count>
+			{step} / {totalSteps}
 			<!--<f:render partial="Election/Properties" arguments="{election:election}"/>-->
 			<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step}"/>
 		</f:else>

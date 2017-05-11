@@ -271,6 +271,7 @@ CREATE TABLE tx_kom_candidate_thesis_mm (
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	opinion tinytext NOT NULL,
+	explanation text NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -290,6 +291,7 @@ CREATE TABLE tx_kom_result_thesis_mm (
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	opinion tinytext NOT NULL,
+	emphasize tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

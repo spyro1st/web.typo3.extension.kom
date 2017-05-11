@@ -16,8 +16,7 @@
 						<div class="col-12 col-sm-6 d-flex">
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{electionDistrict.uid}" />
-								<f:form.hidden name="result[opinions][{step}][uidForeign]" value="{election.uid}" />
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									ich stimme zu
@@ -29,8 +28,7 @@
 						<div class="col-12 col-sm-6 mt-3 mt-sm-0">
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{electionDistrict.uid}" />
-								<f:form.hidden name="result[opinions][{step}][uidForeign]" value="{election.uid}" />
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="-1">
 								<span class="d-flex align-items-center">
 									ich stimme nicht zu
@@ -44,8 +42,7 @@
 						<div class="col-12">
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{electionDistrict.uid}" />
-								<f:form.hidden name="result[opinions][{step}][uidForeign]" value="{election.uid}" />
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="0">
 								<span class="d-flex align-items-center">
 									neutral

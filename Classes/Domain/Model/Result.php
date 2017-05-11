@@ -66,7 +66,7 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinion
      * @return void
      */
-    public function addElection(\DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinion)
+    public function addOpinion(\DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinion)
     {
         $this->opinions->attach($opinion);
     }

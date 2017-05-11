@@ -9,10 +9,10 @@ return [
         'hideTable' => 0,
     ],
     'interface' => [
-        'showRecordFieldList' => 'uid_local, uid_foreign, opinion',
+        'showRecordFieldList' => 'uid_local, uid_foreign, opinion, emphasize',
     ],
     'types' => [
-        '1' => ['showitem' => 'uid_local, uid_foreign, opinion'],
+        '1' => ['showitem' => 'uid_local, uid_foreign, opinion, emphasize'],
     ],
     'columns' => [
         'uid_local' => [
@@ -47,6 +47,18 @@ return [
                     ['Neutral', '0'],
                     ['Negative', '-1'],
                 )
+            ],
+        ],
+        'emphasize' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_result_thesis_mm.emphasize',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    '1' => [
+                        '0' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_result_thesis_mm.emphasize.enabled'
+                    ]
+                ],
             ],
         ],
     ],
