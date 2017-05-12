@@ -3,23 +3,42 @@
 	<f:section name="main">
 
 		<f:flashMessages/>
-		<div id="accordion" role="tablist" aria-multiselectable="true">
-			<f:for each="{result.opinions}" as="opinion" iteration="iterator">
-				<div class="row">
-					<div class="col-12">
-						<div role="tab" id="heading-{iterator.cycle}">
-							<small>These {iterator.cycle}</small>
-							<h5 data-toggle="collapse" data-parent="#accordion" href="#collapse-{iterator.cycle}" aria-expanded="true" aria-controls="collapse-{iterator.cycle}">
-								{opinion.uidLocal.title}
-							</h5>
-						</div>
+		<p>
+			Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
+		</p>
 
-						<div id="collapse-{iterator.cycle}" class="collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
-							<p>{opinion.uidLocal.description}</p>
+		<f:form object="{result}" objectName="result">
+			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+				<f:for each="{result.opinions}" as="opinion" iteration="iterator">
+					<div class="row">
+						<div class="col-12">
+							<div class="thesis-emphasize" role="tab" id="heading-{iterator.cycle}">
+								<span class="d-flex align-items-center">
+									<div class="w-100">
+										<small>These {iterator.cycle}</small>
+										<h5 data-toggle="collapse" data-parent="#accordion" href="#collapse-{iterator.cycle}" aria-expanded="true" aria-controls="collapse-{iterator.cycle}">
+											<span>{opinion.uidLocal.title}</span>
+										</h5>
+									</div>
+									<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" property="opinion.{opinion.uid}.emphasize" />
+									<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
+									<f:switch expression="{opinion.opinion}">
+										<f:case value="1"><i class="fi flaticon-check float-right"></i></f:case>
+										<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
+										<f:case value="0"><i class="fi flaticon-minus float-right"></i></f:case>
+									</f:switch>
+								</span>
+							</div>
+	
+							<div id="collapse-{iterator.cycle}" class="collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
+								<p>{opinion.uidLocal.description}</p>
+							</div>
+							<hr/>
 						</div>
 					</div>
-				</div>
-			</f:for>
-		</div>
+				</f:for>
+			</div>
+			<f:form.submit class="btn btn-lg btn-block btn-primary" value="Ergebnisse anzeigen"/>
+		</f:form>
 	</f:section>
 </html>
