@@ -10,12 +10,12 @@ call_user_func(
             'Pi1',
             [
                 'ElectionDistrict' => 'select',
-                'Election' => 'questionnaire, emphasize'
+                'Election' => 'questionnaire, emphasize, result, compare'
             ],
             // non-cacheable actions
             [
                 'ElectionDistrict' => '',
-                'Election' => ''
+                'Election' => 'questionnaire, emphasize, result, compare'
             ]
         );
 

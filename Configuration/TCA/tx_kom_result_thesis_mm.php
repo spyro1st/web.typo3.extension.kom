@@ -43,9 +43,10 @@ return [
                 'minitems' => 1,
                 'maxitems' => 1,
                 'items' => array(
-                    ['Positive', '1'],
-                    ['Neutral', '0'],
+                    ['Positive', '2'],
+                    ['Neutral', '1'],
                     ['Negative', '-1'],
+                    ['Skip', '0'],
                 )
             ],
         ],

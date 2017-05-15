@@ -1,0 +1,43 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:layout name="Default"/>
+	<f:section name="main">
+
+		<f:flashMessages/>
+
+		<div class="navbar-fixed-top">
+			<nav class="navbar navbar-inverse bg-primary">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col col-auto align-self-center">
+							<f:link.action action="emphasize" controller="Election">
+								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+							</f:link.action>
+						</div>
+						<div class="col col-auto navbar-brand">
+							Ergebnisse
+						</div>
+						<div class="col col-auto align-self-center"></div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="content__main--wrapper">
+			<div class="content__main">
+				<main class="container pt-3">
+					<div class="row">
+						<div class="col-12 mt-3">
+
+							<p>
+								Hohe Übereinstimmungen Ihrer Antworten mit mehreren Kandidaten, bedeuten nicht zwangsläufig eine inhaltliche Nähe der Kandidaten zueinander.
+							</p>
+
+							Lorem Ipsum
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+	</f:section>
+</html>

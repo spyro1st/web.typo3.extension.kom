@@ -21,6 +21,11 @@ plugin.tx_kom {
           tableName = tx_kom_result_thesis_mm
         }
       }
+      DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping {
+        mapping {
+          tableName = tx_kom_candidate_election_mm
+        }
+      }
     }
   }
   features {

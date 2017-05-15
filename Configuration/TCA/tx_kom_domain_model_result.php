@@ -32,7 +32,7 @@ return [
                 ],
             ],
         ],
-        'election_distric' => [
+        'election_district' => [
             'exclude' => true,
             'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_result.election_distric',
             'config' => [

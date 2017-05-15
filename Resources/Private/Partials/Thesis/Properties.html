@@ -1,5 +1,8 @@
 {namespace v=FluidTYPO3\Vhs\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
+	<v:variable.set name="opinion" value="{v:variable.get(name: 'result.opinions.{previousStep}')}" />
+
 	<f:for each="{theses}" as="thesis" iteration="iterator">
 		<f:if condition="{iterator.cycle} == {step}">
 			<div class="row mb-3">
@@ -17,7 +20,7 @@
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="1">
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="result[opinions][{step}][opinion]" value="2">
 								<span class="d-flex align-items-center">
 									ich stimme zu
 									<i class="fi flaticon-check float-right"></i>
@@ -29,7 +32,7 @@
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="-1">
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="result[opinions][{step}][opinion]" value="-1">
 								<span class="d-flex align-items-center">
 									ich stimme nicht zu
 									<i class="fi flaticon-cancel float-right"></i>
@@ -43,7 +46,7 @@
 							<f:form class="w-100" arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
 								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary" name="result[opinions][{step}][opinion]" value="0">
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="result[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									neutral
 									<i class="fi flaticon-minus float-right"></i>

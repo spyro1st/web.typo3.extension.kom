@@ -1,25 +1,80 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default"/>
 
 <f:section name="main">
 
 	<f:flashMessages/>
-	<f:if condition="{step} == 0">
-		<f:then>
-			<h1>Willkommen beim Kandidat-O-Mat</h1>
-			<p>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.
-			</p>
-			<f:link.action action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary">
-				Jetzt starten
-				<i class="fi flaticon-arrow2-o"></i>
-			</f:link.action>
-		</f:then>
-		<f:else>
-			{step} / {totalSteps}
-			<!--<f:render partial="Election/Properties" arguments="{election:election}"/>-->
-			<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step}"/>
-		</f:else>
-	</f:if>
+	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
+	<v:variable.set name="thesis" value="{v:variable.get(name: 'thesesMappings.theses.{previousStep}')}" />
+
+	<div class="navbar-fixed-top">
+		<nav class="navbar navbar-inverse bg-primary">
+			<div class="container">
+				<div class="row justify-content-between">
+					<f:if condition="{step} == 0">
+						<f:then>
+							<div class="col col-auto align-self-center">
+								<f:link.page pageUid="1">
+									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+								</f:link.page>
+							</div>
+							<div class="col col-auto navbar-brand">
+								Kandidat-O-Mat
+							</div>
+							<div class="col col-auto align-self-center"></div>
+						</f:then>
+						<f:else>
+							<div class="col col-auto align-self-center">
+								<f:link.action action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
+									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+								</f:link.action>
+							</div>
+							<div class="col col-auto navbar-brand">
+								These <strong>{step}</strong> von {totalSteps}
+							</div>
+						</f:else>
+					</f:if>
+					<f:if condition="{step} > 0">
+						<div class="col col-auto align-self-center">
+							<f:form arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
+								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="0">
+									<i class="fi flaticon-arrow2"></i>
+								</f:form.button>
+							</f:form>
+						</div>
+					</f:if>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="content__main--wrapper">
+		<div class="content__main">
+			<main class="container pt-3">
+				<div class="row">
+					<div class="col-12 mt-3">
+						<f:if condition="{step} == 0">
+							<f:then>
+								<h1>Willkommen beim Kandidat-O-Mat</h1>
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.
+								</p>
+								<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary">
+									Jetzt starten
+									<i class="fi flaticon-arrow2"></i>
+								</f:link.action>
+							</f:then>
+							<f:else>
+								<!--<f:render partial="Election/Properties" arguments="{election:election}"/>-->
+								<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step}"/>
+							</f:else>
+						</f:if>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
 </f:section>
 </html>

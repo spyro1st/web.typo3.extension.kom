@@ -49,7 +49,7 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * elections
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping>
      */
     protected $elections = null;
 
@@ -162,10 +162,10 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Election
      *
-     * @param \DigitalPatrioten\Kom\Domain\Model\Election $election
+     * @param \DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping $election
      * @return void
      */
-    public function addElection(\DigitalPatrioten\Kom\Domain\Model\Election $election)
+    public function addElection(\DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping $election)
     {
         $this->elections->attach($election);
     }
@@ -173,10 +173,10 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Election
      *
-     * @param \DigitalPatrioten\Kom\Domain\Model\Election $electionToRemove The Election to be removed
+     * @param \DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping $electionToRemove The Election to be removed
      * @return void
      */
-    public function removeElection(\DigitalPatrioten\Kom\Domain\Model\Election $electionToRemove)
+    public function removeElection(\DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping $electionToRemove)
     {
         $this->elections->detach($electionToRemove);
     }
@@ -184,7 +184,7 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the elections
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election> $elections
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping> $elections
      */
     public function getElections()
     {
@@ -194,7 +194,7 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the elections
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\Election> $elections
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\CandidateElectionMapping> $elections
      * @return void
      */
     public function setElections(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $elections)

@@ -188,7 +188,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_kom_domain_model_election',
+                'foreign_table' => 'tx_kom_electiondistrict_election_mm',
                 'MM' => 'tx_kom_candidate_election_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
@@ -215,7 +215,7 @@ return [
                         'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
                         'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
                         'params' => [
-                            'table' => 'tx_kom_domain_model_election',
+                            'table' => 'tx_kom_electiondistrict_election_mm',
                             'pid' => '###CURRENT_PID###',
                             'setValue' => 'prepend'
                         ],

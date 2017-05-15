@@ -1,44 +1,89 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 	<f:layout name="Default"/>
 	<f:section name="main">
 
 		<f:flashMessages/>
-		<p>
-			Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
-		</p>
+		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}" />
 
-		<f:form object="{result}" objectName="result">
-			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
-				<f:for each="{result.opinions}" as="opinion" iteration="iterator">
+		<div class="navbar-fixed-top">
+			<nav class="navbar navbar-inverse bg-primary">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col col-auto align-self-center">
+							<f:link.action action="questionnaire" controller="Election" arguments="{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}">
+								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+							</f:link.action>
+						</div>
+						<div class="col col-auto navbar-brand">
+							Thesen gewichten
+						</div>
+						<div class="col col-auto align-self-center"></div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="content__main--wrapper">
+			<div class="content__main">
+				<main class="container pt-3">
 					<div class="row">
-						<div class="col-12">
-							<div class="thesis-emphasize" role="tab" id="heading-{iterator.cycle}">
-								<span class="d-flex align-items-center">
-									<div class="w-100">
-										<small>These {iterator.cycle}</small>
-										<h5 data-toggle="collapse" data-parent="#accordion" href="#collapse-{iterator.cycle}" aria-expanded="true" aria-controls="collapse-{iterator.cycle}">
-											<span>{opinion.uidLocal.title}</span>
-										</h5>
-									</div>
-									<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" property="opinion.{opinion.uid}.emphasize" />
-									<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
-									<f:switch expression="{opinion.opinion}">
-										<f:case value="1"><i class="fi flaticon-check float-right"></i></f:case>
-										<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
-										<f:case value="0"><i class="fi flaticon-minus float-right"></i></f:case>
-									</f:switch>
-								</span>
-							</div>
-	
-							<div id="collapse-{iterator.cycle}" class="collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
-								<p>{opinion.uidLocal.description}</p>
-							</div>
-							<hr/>
+						<div class="col-12 mt-3">
+
+							<p>
+								Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
+							</p>
+
+							<f:form action="result">
+								<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
+										<div class="row">
+											<div class="col-12">
+												<div class="thesis-emphasize{f:if(condition: '{opinion.emphasize}', then: ' emphasized')}" role="tab" id="heading-{iterator.cycle}">
+													<span class="d-flex align-items-center">
+														<div class="w-100">
+															<small>These {iterator.cycle}</small>
+															<span class="emphasize-indicator">
+																	<i class="fi flaticon-star"></i> <small>besonders wichtig</small>
+															</span>
+															<h5 data-toggle="collapse" data-parent="#accordion" href="#collapse-{iterator.cycle}" aria-expanded="true" aria-controls="collapse-{iterator.cycle}">
+																<span>{opinion.uidLocal.title}</span>
+															</h5>
+														</div>
+														<span class="emphasize-toggle">
+															<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="result[opinions][{iterator.cycle}][emphasize]" />
+															<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
+														</span>
+														<span class="opinion-wrap">
+															<f:switch expression="{opinion.opinion}">
+																<f:case value="2"><i class="fi flaticon-check float-right"></i></f:case>
+																<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
+																<f:case value="1"><i class="fi flaticon-minus float-right"></i></f:case>
+																<f:case value="0"><i class="fi float-right"></i></f:case>
+															</f:switch>
+														</span>
+													</span>
+												</div>
+
+												<div id="collapse-{iterator.cycle}" class="collapse thesis-collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
+													<p>{opinion.uidLocal.description}</p>
+												</div>
+												<hr/>
+											</div>
+										</div>
+									</f:for>
+								</div>
+								<nav class="fixed-bottom">
+									<f:form.button class="btn btn-lg btn-block btn-outline-primary">
+										Ergebnisse anzeigen
+										<i class="fi flaticon-arrow2"></i>
+									</f:form.button>
+								</nav>
+							</f:form>
 						</div>
 					</div>
-				</f:for>
+				</main>
 			</div>
-			<f:form.submit class="btn btn-lg btn-block btn-primary" value="Ergebnisse anzeigen"/>
-		</f:form>
+		</div>
 	</f:section>
 </html>
