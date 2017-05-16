@@ -28,8 +28,8 @@ class CandidateRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         $query = $this->createQuery();
         $query->matching(
             $query->logicalAnd(
-                $query->contains('elections.uidLocal', $electionDistrict),
-                $query->contains('elections.uidForeign', $election)
+                $query->equals('elections.uidLocal', $electionDistrict),
+                $query->equals('elections.uidForeign', $election)
             )
         );
 

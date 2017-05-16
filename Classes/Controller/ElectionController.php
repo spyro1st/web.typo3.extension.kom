@@ -263,13 +263,14 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     public function resultAction(\DigitalPatrioten\Kom\Domain\Model\Result $result = NULL) {
         $result = $this->createResultObjectFromSession();
 
-        /* @var \DigitalPatrioten\Kom\Domain\Service\ResultService $result */
+        /* @var \DigitalPatrioten\Kom\Service\ResultService $result */
         $resultService = $this->objectManager->get('DigitalPatrioten\\Kom\\Service\\ResultService');
-        $calculatedResult = $resultService->calculateResult($result);
+        $calculatedResults = $resultService->calculateResult($result);
 
         $this->view->assignMultiple(
             [
-                'result' => $result
+                'result' => $result,
+                'calculatedResults' => $calculatedResults
             ]
         );
     }

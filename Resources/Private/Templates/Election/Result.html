@@ -33,7 +33,39 @@
 								Hohe Übereinstimmungen Ihrer Antworten mit mehreren Kandidaten, bedeuten nicht zwangsläufig eine inhaltliche Nähe der Kandidaten zueinander.
 							</p>
 
-							Lorem Ipsum
+							<f:form action="compare">
+								<f:for each="{calculatedResults}" as="calculatedResult">
+									<div class="row">
+										<div class="col-4 col-md-2">
+											<f:if condition="{calculatedResult.candidate.image}">
+												<f:then>
+													<f:image src="{calculatedResult.candidate.image.uid}" width="100c" height="100c" class="img-fluid rounded-circle" alt="{calculatedResult.candidate.fullName}" treatIdAsReference="TRUE" />
+												</f:then>
+												<f:else>
+													<f:image src="" width="100c" height="100c" class="img-fluid rounded-circle" alt="{calculatedResult.candidate.fullName}" />
+												</f:else>
+											</f:if>
+										</div>
+										<div class="col-6 col-md-8">
+											<h4>
+												{calculatedResult.candidate.fullName}
+											</h4>
+										</div>
+										<div class="col-2">
+											<strong>
+												{v:math.round(a: '{calculatedResult.percentage}', fail: 1)}%
+											</strong>
+										</div>
+									</div>
+									<hr/>
+								</f:for>
+								<nav class="fixed-bottom">
+									<f:form.button class="btn btn-lg btn-block btn-outline-primary">
+										Antworten vergleichen
+										<i class="fi flaticon-arrow2"></i>
+									</f:form.button>
+								</nav>
+							</f:form>
 						</div>
 					</div>
 				</main>

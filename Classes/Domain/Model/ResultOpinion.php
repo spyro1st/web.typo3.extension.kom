@@ -9,7 +9,7 @@ namespace DigitalPatrioten\Kom\Domain\Model;
  ***/
 
 /**
- * Thesis
+ * ResultOpinion
  */
 class ResultOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
