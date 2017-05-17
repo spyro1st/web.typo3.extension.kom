@@ -1,0 +1,53 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<div class="carousel-item{f:if(condition: '{iterator.isFirst}', then: ' active')}">
+		<div class="w-100">
+			<div class="row">
+				<div class="col-12">
+					<div class="thesis-balloon">
+						<h2>{opinion.uidLocal.title}</h2>
+						{opinion.uidLocal.description}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<span class="d-flex align-items-center">
+						<div class="w-100">
+							<f:switch expression="{opinion.opinion}">
+								<f:case value="2"><strong class="check">Sie stimmen zu</strong></f:case>
+								<f:case value="-1"><strong class="cancel">Sie stimmen nicht zu</strong></f:case>
+								<f:case value="1"><strong>Sie stehen neutral dazu</strong></f:case>
+								<f:case value="0"><strong>Übersprungen</strong></f:case>
+							</f:switch>
+						</div>
+						<f:if condition="{opinion.emphasize}">
+							<span class="emphasize-toggle">
+								<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="checked" />
+								<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
+						</span>
+						</f:if>
+						<span class="opinion-wrap">
+							<f:switch expression="{opinion.opinion}">
+								<f:case value="2"><i class="fi flaticon-check float-right"></i></f:case>
+								<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
+								<f:case value="1"><i class="fi flaticon-minus float-right"></i></f:case>
+								<f:case value="0"><i class="fi float-right"></i></f:case>
+							</f:switch>
+						</span>
+					</span>
+					<hr/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
+						<f:for each="{candidates}" as="candidate" iteration="subiterator">
+							<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: iterator}"/>
+						</f:for>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

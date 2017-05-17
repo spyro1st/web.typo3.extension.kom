@@ -99,6 +99,13 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     protected $resultRepository = NULL;
 
     /**
+     * candidateRepository
+     * @var \DigitalPatrioten\Kom\Domain\Repository\CandidateRepository
+     * @inject
+     */
+    protected $candidateRepository = NULL;
+
+    /**
      * action list
      * @return void
      */
@@ -213,6 +220,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
 
         if ($step === 0) {
+            $this->clearSessionData();
             /* @var \DigitalPatrioten\Kom\Domain\Model\Result $result */
             $result = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
             $result->setElection($election);
@@ -220,6 +228,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
         else {
             $result = $this->createResultObjectFromSession();
+        }
+        
+        if ($step > 1 && $result->getOpinions()->count() == 0) {
+            $this->redirectToStart();
         }
 
         $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
@@ -280,10 +292,15 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      */
     public function compareAction() {
         $result = $this->createResultObjectFromSession();
+        $candidates = $this->candidateRepository->findByElectionDistrictAndElection(
+            $result->getElectionDistrict(),
+            $result->getElection()
+        );
 
         $this->view->assignMultiple(
             [
-                'result' => $result
+                'result' => $result,
+                'candidates' => $candidates
             ]
         );
     }
@@ -295,6 +312,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      */
     private function createResultObjectFromSession() {
         $resultData = $this->sessionData['formData'];
+        
+        if(empty($resultData) || !$resultData['election'] || !$resultData['electionDistrict']) {
+           $this->redirectToStart();
+        }
 
         /* @var \DigitalPatrioten\Kom\Domain\Model\Result $resultObject */
         $resultObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
@@ -325,5 +346,17 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 //        $this->clearSessionData();
 //
 //        $this->redirect('emphasize', NULL, NULL, ['result' => $resultObject]);
+    }
+
+    /**
+     * @return void
+     */
+    protected function redirectToStart() {
+        $pageUid = $this->settings['homePid'] || 1;
+        $uriBuilder = $this->uriBuilder;
+        $uri = $uriBuilder
+            ->setTargetPageUid($pageUid)
+            ->build();
+        $this->redirectToUri($uri, 0, 404);
     }
 }

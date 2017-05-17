@@ -1,5 +1,5 @@
 
-plugin.tx_kom_pi1 {
+plugin.tx_kom {
   view {
     # cat=plugin.tx_kom_pi1/file; type=string; label=Path to template root (FE)
     templateRootPath = EXT:kom/Resources/Private/Templates/
@@ -11,6 +11,10 @@ plugin.tx_kom_pi1 {
   persistence {
     # cat=plugin.tx_kom_pi1//a; type=string; label=Default storage PID
     storagePid = 3
+  }
+  
+  settings {
+    homePid = 1
   }
 }
 

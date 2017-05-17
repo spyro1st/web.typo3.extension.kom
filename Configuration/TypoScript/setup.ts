@@ -1,14 +1,14 @@
 plugin.tx_kom {
   view {
     templateRootPaths.0 = EXT:kom/Resources/Private/Templates/
-    templateRootPaths.1 = {$plugin.tx_kom_pi1.view.templateRootPath}
+    templateRootPaths.1 = {$plugin.tx_kom.view.templateRootPath}
     partialRootPaths.0 = EXT:kom/Resources/Private/Partials/
-    partialRootPaths.1 = {$plugin.tx_kom_pi1.view.partialRootPath}
+    partialRootPaths.1 = {$plugin.tx_kom.view.partialRootPath}
     layoutRootPaths.0 = EXT:kom/Resources/Private/Layouts/
-    layoutRootPaths.1 = {$plugin.tx_kom_pi1.view.layoutRootPath}
+    layoutRootPaths.1 = {$plugin.tx_kom.view.layoutRootPath}
   }
   persistence {
-    storagePid = {$plugin.tx_kom_pi1.persistence.storagePid}
+    storagePid = {$plugin.tx_kom.persistence.storagePid}
     #recursive = 1
     classes {
       DigitalPatrioten\Kom\Domain\Model\ElectiondistrictElectionMapping {
@@ -38,6 +38,10 @@ plugin.tx_kom {
   }
   mvc {
     #callDefaultActionIfActionCantBeResolved = 1
+  }
+  
+  settings {
+    homePid = {$plugin.tx_kom.settings.homePid}
   }
 }
 

@@ -20,20 +20,6 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
      */
     protected $candidateRepository = NULL;
 
-    public function debugQuery(\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult, $explainOutput = FALSE) {
-        $GLOBALS['TYPO3_DB']->debugOutput = 2;
-        if ($explainOutput) {
-            $GLOBALS['TYPO3_DB']->explainOutput = TRUE;
-        }
-        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = TRUE;
-        $queryResult->toArray();
-        DebuggerUtility::var_dump($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
-
-        $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = FALSE;
-        $GLOBALS['TYPO3_DB']->explainOutput = FALSE;
-        $GLOBALS['TYPO3_DB']->debugOutput = FALSE;
-    }
-
     /**
      * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
      *

@@ -85,10 +85,10 @@ class CandidateOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getEmphasize() {
-        return $this->emphasize;
+    public function getExplanation() {
+        return $this->explanation;
     }
 
     /**
