@@ -9,7 +9,7 @@
 	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
 	<v:variable.set name="thesis" value="{v:variable.get(name: 'thesesMappings.theses.{previousStep}')}" />
 
-	<div class="navbar-fixed-top">
+	<div class="sticky-top">
 		<nav class="navbar navbar-inverse bg-primary">
 			<div class="container">
 				<div class="row justify-content-between">
