@@ -93,6 +93,7 @@ CREATE TABLE tx_kom_domain_model_candidate (
 	title varchar(255) DEFAULT '' NOT NULL,
 	first_name varchar(255) DEFAULT '' NOT NULL,
 	last_name varchar(255) DEFAULT '' NOT NULL,
+	description text NOT NULL,
 	image int(11) unsigned NOT NULL default '0',
 	elections int(11) unsigned DEFAULT '0' NOT NULL,
 	opinions int(11) unsigned DEFAULT '0' NOT NULL,

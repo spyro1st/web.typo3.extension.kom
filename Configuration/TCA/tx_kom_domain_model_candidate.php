@@ -22,10 +22,10 @@ return [
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_candidate.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections, opinions',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, description, image, elections, opinions',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, image, elections, opinions, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, first_name, last_name, description, image, elections, opinions, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -135,6 +135,17 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_candidate.description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
         ],
         'image' => [
             'exclude' => true,

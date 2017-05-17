@@ -47,13 +47,16 @@
 													</f:else>
 												</f:if>
 											</div>
-											<div class="col-6 col-md-8">
+											<div class="col-5 col-md-8">
 												<h5 class="py-1">
 													{calculatedResult.candidate.fullName}
 												</h5>
+												<p>
+													{calculatedResult.candidate.description}
+												</p>
 											</div>
-											<div class="col-2 text-right">
-												<strong>
+											<div class="col-3 col-md-2 text-right">
+												<strong class="result-percentage">
 													{v:math.round(a: '{calculatedResult.percentage}', fail: 1)}%
 												</strong>
 											</div>

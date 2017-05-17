@@ -32,6 +32,12 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $lastName = '';
 
     /**
+     * description
+     * @var string
+     */
+    protected $description = '';
+
+    /**
      * image
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      * @cascade remove
@@ -135,6 +141,25 @@ class Candidate extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $fullName = "$fullName {$this->getFirstName()} {$this->getLastName()}";
         
         return $fullName;
+    }
+
+    /**
+     * Returns the description
+     * @return string $description
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     *
+     * @return void
+     */
+    public function setDescription($description) {
+        $this->description = $description;
     }
 
     /**

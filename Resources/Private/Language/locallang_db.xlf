@@ -48,6 +48,9 @@
 			<trans-unit id="tx_kom_domain_model_candidate.last_name">
 				<source>Last Name</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_candidate.description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.image">
 				<source>Image</source>
 			</trans-unit>
