@@ -29,24 +29,33 @@
 					<div class="row">
 						<div class="col-12 mt-3">
 
-							<p>
+							<p class="pb-3">
 								Vergleichen Sie Ihre Antworten mit denen der Kandidaten. Viele Kandidaten haben Ihre Antworten begründet.
 							</p>
 
 							<div id="theses-carousel" class="carousel slide" data-interval="false">
+								<div class="row mb-3 justify-content-between carousel-navigation">
+									<div class="col col-auto">
+										<a href="#theses-carousel" role="button" data-slide="prev">
+											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse" aria-hidden="true"></i>
+											<span class="sr-only">Previous</span>
+										</a>
+									</div>
+									<div class="col col-auto">
+										<strong>These <span class="current-number">1</span></strong>/<span class="total-number"><f:count subject="{result.opinions}"/></span>
+									</div>
+									<div class="col col-auto">
+										<a href="#theses-carousel" role="button" data-slide="next">
+											<i class="fi flaticon-arrow2" aria-hidden="true"></i>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</div>
 								<div class="carousel-inner" role="listbox">
 									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 										<f:render partial="Thesis/Compare" arguments="{opinion: opinion, candidates: candidates, iterator: iterator}"/>
 									</f:for>
 								</div>
-								<a class="carousel-control-prev" href="#theses-carousel" role="button" data-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="sr-only">Previous</span>
-								</a>
-								<a class="carousel-control-next" href="#theses-carousel" role="button" data-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="sr-only">Next</span>
-								</a>
 							</div>
 						</div>
 					</div>

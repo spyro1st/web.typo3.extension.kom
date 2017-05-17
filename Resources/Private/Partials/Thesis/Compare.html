@@ -22,17 +22,16 @@
 							</f:switch>
 						</div>
 						<f:if condition="{opinion.emphasize}">
-							<span class="emphasize-toggle">
-								<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="checked" />
-								<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
+							<span class="opinion-wrap mr-1">
+								<i class="fi flaticon-star"></i>
 						</span>
 						</f:if>
 						<span class="opinion-wrap">
 							<f:switch expression="{opinion.opinion}">
-								<f:case value="2"><i class="fi flaticon-check float-right"></i></f:case>
-								<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
-								<f:case value="1"><i class="fi flaticon-minus float-right"></i></f:case>
-								<f:case value="0"><i class="fi float-right"></i></f:case>
+								<f:case value="2"><i class="fi flaticon-check"></i></f:case>
+								<f:case value="-1"><i class="fi flaticon-cancel"></i></f:case>
+								<f:case value="1"><i class="fi flaticon-minus"></i></f:case>
+								<f:case value="0"><i class="fi"></i></f:case>
 							</f:switch>
 						</span>
 					</span>

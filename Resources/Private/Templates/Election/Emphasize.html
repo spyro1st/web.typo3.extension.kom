@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-12 mt-3">
 
-							<p>
+							<p class="pb-3">
 								Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
 							</p>
 
@@ -50,16 +50,16 @@
 																<span>{opinion.uidLocal.title}</span>
 															</h5>
 														</div>
-														<span class="emphasize-toggle">
+														<span class="emphasize-toggle mr-1">
 															<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="result[opinions][{iterator.cycle}][emphasize]" />
-															<label class="mr-1" for="emphasize-{iterator.cycle}"></label>
+															<label for="emphasize-{iterator.cycle}"></label>
 														</span>
 														<span class="opinion-wrap">
 															<f:switch expression="{opinion.opinion}">
-																<f:case value="2"><i class="fi flaticon-check float-right"></i></f:case>
-																<f:case value="-1"><i class="fi flaticon-cancel float-right"></i></f:case>
-																<f:case value="1"><i class="fi flaticon-minus float-right"></i></f:case>
-																<f:case value="0"><i class="fi float-right"></i></f:case>
+																<f:case value="2"><i class="fi flaticon-check"></i></f:case>
+																<f:case value="-1"><i class="fi flaticon-cancel"></i></f:case>
+																<f:case value="1"><i class="fi flaticon-minus"></i></f:case>
+																<f:case value="0"><i class="fi"></i></f:case>
 															</f:switch>
 														</span>
 													</span>
@@ -74,9 +74,9 @@
 									</f:for>
 								</div>
 								<nav class="fixed-bottom">
-									<f:form.button class="btn btn-lg btn-block btn-outline-primary">
+									<f:form.button class="btn btn-lg btn-block btn-inverted">
 										Ergebnisse anzeigen
-										<i class="fi flaticon-arrow2"></i>
+										<i class="fi flaticon-arrow flaticon-arrow-reverse"></i>
 									</f:form.button>
 								</nav>
 							</f:form>

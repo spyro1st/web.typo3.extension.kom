@@ -23,7 +23,9 @@
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="result[opinions][{step}][opinion]" value="2">
 								<span class="d-flex align-items-center">
 									ich stimme zu
-									<i class="fi flaticon-check float-right"></i>
+									<span class="opinion-wrap">
+										<i class="fi flaticon-check"></i>
+									</span>
 								</span>
 								</f:form.button>
 							</f:form>
@@ -34,7 +36,9 @@
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="result[opinions][{step}][opinion]" value="-1">
 								<span class="d-flex align-items-center">
 									ich stimme nicht zu
-									<i class="fi flaticon-cancel float-right"></i>
+									<span class="opinion-wrap">
+										<i class="fi flaticon-cancel"></i>
+									</span>
 								</span>
 								</f:form.button>
 							</f:form>
@@ -47,7 +51,9 @@
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="result[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									neutral
-									<i class="fi flaticon-minus float-right"></i>
+									<span class="opinion-wrap">
+										<i class="fi flaticon-minus"></i>
+									</span>
 								</span>
 								</f:form.button>
 							</f:form>
