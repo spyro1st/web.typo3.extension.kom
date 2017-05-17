@@ -10,7 +10,7 @@
 				<div class="container">
 					<div class="row justify-content-between">
 						<div class="col col-auto align-self-center">
-							<f:link.action action="emphasize" controller="Election">
+							<f:link.action action="emphasize" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}">
 								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
 							</f:link.action>
 						</div>
@@ -33,7 +33,7 @@
 								Hohe Übereinstimmungen Ihrer Antworten mit mehreren Kandidaten, bedeuten nicht zwangsläufig eine inhaltliche Nähe der Kandidaten zueinander.
 							</p>
 
-							<f:form action="compare">
+							<f:form action="compare" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
 								<f:for each="{calculatedResults}" as="calculatedResult">
 									<div class="row">
 										<div class="col-4 col-md-2">

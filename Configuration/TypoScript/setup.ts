@@ -34,7 +34,7 @@ plugin.tx_kom {
     }
   }
   features {
-    #skipDefaultArguments = 1
+    skipDefaultArguments = 1
   }
   mvc {
     #callDefaultActionIfActionCantBeResolved = 1
@@ -42,6 +42,7 @@ plugin.tx_kom {
   
   settings {
     homePid = {$plugin.tx_kom.settings.homePid}
+    questionnairePid = {$plugin.tx_kom.settings.questionnairePid}
   }
 }
 

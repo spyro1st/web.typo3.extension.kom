@@ -239,7 +239,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $totalSteps = $thesesMappings->getTheses()->count();
 
         if ($step === ($totalSteps + 1)) {
-            $this->redirect('emphasize');
+            $this->redirect('emphasize', NULL, NULL, ['electionDistrict' => $electionDistrict, 'election' => $election]);
         }
 
         $this->view->assignMultiple(

@@ -11,7 +11,7 @@
 				<div class="container">
 					<div class="row justify-content-between">
 						<div class="col col-auto align-self-center">
-							<f:link.action action="questionnaire" controller="Election" arguments="{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}">
+							<f:link.action action="questionnaire" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}">
 								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
 							</f:link.action>
 						</div>
@@ -34,7 +34,7 @@
 								Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
 							</p>
 
-							<f:form action="result">
+							<f:form action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
 								<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
 									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 										<div class="row">

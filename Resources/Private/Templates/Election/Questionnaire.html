@@ -5,6 +5,7 @@
 <f:section name="main">
 
 	<f:flashMessages/>
+	<v:variable.set name="nextStep" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
 	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
 	<v:variable.set name="thesis" value="{v:variable.get(name: 'thesesMappings.theses.{previousStep}')}" />
 
@@ -26,7 +27,7 @@
 						</f:then>
 						<f:else>
 							<div class="col col-auto align-self-center">
-								<f:link.action action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
+								<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
 									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
 								</f:link.action>
 							</div>
@@ -37,8 +38,7 @@
 					</f:if>
 					<f:if condition="{step} > 0">
 						<div class="col col-auto align-self-center">
-							<f:form arguments="{electionDistrict: electionDistrict, election: election}" object="{result}" objectName="result">
-								<f:form.hidden name="step" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
+							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="0">
 									<i class="fi flaticon-arrow2"></i>
