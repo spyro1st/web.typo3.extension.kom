@@ -58,12 +58,12 @@
 						<f:if condition="{step} == 0">
 							<f:then>
 								<h1>Willkommen beim Kandidat-O-Mat</h1>
-								<p>
+								<p class="pb-3">
 									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.
 								</p>
-								<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary">
+								<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary btn-block-xs">
 									Jetzt starten
-									<i class="fi flaticon-arrow2"></i>
+									<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3 float-right"></i>
 								</f:link.action>
 							</f:then>
 							<f:else>
