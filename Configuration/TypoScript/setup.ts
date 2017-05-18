@@ -4,6 +4,7 @@ plugin.tx_kom {
     templateRootPaths.1 = {$plugin.tx_kom.view.templateRootPath}
     partialRootPaths.0 = EXT:kom/Resources/Private/Partials/
     partialRootPaths.1 = {$plugin.tx_kom.view.partialRootPath}
+    partialRootPaths.2 = EXT:theme_kom/Resources/Private/Partials/
     layoutRootPaths.0 = EXT:kom/Resources/Private/Layouts/
     layoutRootPaths.1 = {$plugin.tx_kom.view.layoutRootPath}
   }

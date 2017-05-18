@@ -5,7 +5,7 @@
 
 		<f:flashMessages/>
 
-		<div class="sticky-top">
+		<div class="sticky-top hidden-md-up">
 			<nav class="navbar navbar-inverse bg-primary">
 				<div class="container">
 					<div class="row justify-content-between">
@@ -22,12 +22,21 @@
 				</div>
 			</nav>
 		</div>
+		<div class="hidden-xs-down">
+			<div class="sticky-top">
+				<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
+			</div>
+		</div>
 
 		<div class="content__main--wrapper">
 			<div class="content__main">
 				<main class="container pt-3">
 					<div class="row">
 						<div class="col-12 mt-3">
+							
+							<h1 class="hidden-xs-down">
+								Ergebnisse
+							</h1>
 
 							<p class="pb-3">
 								Hohe Übereinstimmungen Ihrer Antworten mit mehreren Kandidaten, bedeuten nicht zwangsläufig eine inhaltliche Nähe der Kandidaten zueinander.
@@ -61,16 +70,33 @@
 												</strong>
 											</div>
 										</div>
-										<hr/>
+										<div class="percentage-indicator-wrap">
+											<div class="percentage-indicator hidden-xs-down" style="width: {v:math.round(a: '{calculatedResult.percentage}', fail: 1)}%;"></div>
+											<hr/>
+										</div>
 									</f:for>
-									<nav class="fixed-bottom">
+									<nav class="fixed-bottom hidden-md-up">
 										<f:form.button class="btn btn-lg btn-block btn-inverted">
 											Antworten vergleichen
-											<i class="fi flaticon-compare"></i>
+											<i class="fi flaticon-compare ml-3"></i>
 										</f:form.button>
 									</nav>
 								</f:form>
 							</div>
+						</div>
+					</div>
+					<div class="row mt-3 align-items-center hidden-xs-down">
+						<div class="col-6">
+							<f:link.action action="emphasize" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}">
+								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+								zurück zur Gewichtung
+							</f:link.action>
+						</div>
+						<div class="col-6 text-right">
+							<f:link.action action="compare" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}" class="btn btn-lg btn-primary">
+								Antworten vergleichen
+								<i class="fi flaticon-compare ml-3"></i>
+							</f:link.action>
 						</div>
 					</div>
 				</main>

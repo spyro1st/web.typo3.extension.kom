@@ -10,43 +10,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-12">
-					<span class="d-flex align-items-center">
-						<div class="w-100">
-							<f:switch expression="{opinion.opinion}">
-								<f:case value="2"><strong class="check">Sie stimmen zu</strong></f:case>
-								<f:case value="-1"><strong class="cancel">Sie stimmen nicht zu</strong></f:case>
-								<f:case value="1"><strong>Sie stehen neutral dazu</strong></f:case>
-								<f:case value="0"><strong>Übersprungen</strong></f:case>
-							</f:switch>
-						</div>
-						<f:if condition="{opinion.emphasize}">
-							<span class="opinion-wrap mr-1">
-								<i class="fi flaticon-star"></i>
-						</span>
-						</f:if>
-						<span class="opinion-wrap">
-							<f:switch expression="{opinion.opinion}">
-								<f:case value="2"><i class="fi flaticon-check"></i></f:case>
-								<f:case value="-1"><i class="fi flaticon-cancel"></i></f:case>
-								<f:case value="1"><i class="fi flaticon-minus"></i></f:case>
-								<f:case value="0"><i class="fi"></i></f:case>
-							</f:switch>
-						</span>
-					</span>
-					<hr/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
-						<f:for each="{candidates}" as="candidate" iteration="subiterator">
-							<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: iterator}"/>
-						</f:for>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </html>

@@ -8,16 +8,55 @@
 		<f:if condition="{iterator.cycle} == {step}">
 			<div class="row mb-3">
 				<div class="col-12">
-					<div class="thesis-balloon">
-						<h2>{thesis.title}</h2>
-						{thesis.description}
+					<div class="thesis-balloon-wrap">
+						<div class="hidden-xs-down">
+							<f:if condition="{step} == 0">
+								<f:then>
+									<div class="thesis-control-prev">
+										<f:link.page pageUid="1">
+											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+										</f:link.page>
+									</div></f:then>
+								<f:else>
+									<div class="thesis-control-prev">
+										<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
+											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+										</f:link.action>
+									</div>
+								</f:else>
+							</f:if>
+							<f:if condition="{opinion.opinion}">
+								<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
+									<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+									<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="{opinion.opinion}">
+										<i class="fi flaticon-arrow2"></i>
+									</f:form.button>
+								</f:form>
+							</f:if>
+							<div class="text-right">
+								These <strong>{step}</strong> von {totalSteps}
+							</div>
+						</div>
+						<div class="thesis-balloon">
+							<h2>{thesis.title}</h2>
+							{thesis.description}
+						</div>
+						<div>
+							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
+								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="skip-thesis float-right" name="result[opinions][{step}][opinion]" value="0">
+									These überspringen
+									<i class="fi flaticon-arrow2"></i>
+								</f:form.button>
+							</f:form>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row my-3">
 				<div class="col-12">
 					<div class="row">
-						<div class="col-12 col-sm-6 d-flex">
+						<div class="col-12 col-sm-4 d-flex">
 							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="result[opinions][{step}][opinion]" value="2">
@@ -30,7 +69,7 @@
 								</f:form.button>
 							</f:form>
 						</div>
-						<div class="col-12 col-sm-6 mt-3 mt-sm-0">
+						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
 							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="result[opinions][{step}][opinion]" value="-1">
@@ -43,9 +82,7 @@
 								</f:form.button>
 							</f:form>
 						</div>
-					</div>
-					<div class="row mt-3">
-						<div class="col-12">
+						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
 							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="result[opinions][{step}][opinion]" value="1">

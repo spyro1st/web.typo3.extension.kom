@@ -65,6 +65,13 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
             }
         }
 
+        usort($calculatedResults, function($a, $b) {
+            if ($a['percentage'] == $b['percentage']) {
+                return 0;
+            }
+            return ($a['percentage'] < $b['percentage']) ? 1 : -1;
+        });
+
         return $calculatedResults;
     }
 
@@ -102,4 +109,5 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
         return $score;
     }
+
 }

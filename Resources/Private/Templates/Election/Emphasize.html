@@ -6,7 +6,7 @@
 		<f:flashMessages/>
 		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}" />
 
-		<div class="sticky-top">
+		<div class="sticky-top hidden-md-up">
 			<nav class="navbar navbar-inverse bg-primary">
 				<div class="container">
 					<div class="row justify-content-between">
@@ -23,18 +23,27 @@
 				</div>
 			</nav>
 		</div>
+		<div class="hidden-xs-down">
+			<div class="sticky-top">
+				<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
+			</div>
+		</div>
 
 		<div class="content__main--wrapper">
 			<div class="content__main">
 				<main class="container pt-3">
 					<div class="row">
 						<div class="col-12 mt-3">
+							
+							<h1 class="hidden-xs-down">
+								Thesen gewichten
+							</h1>
 
 							<p class="pb-3">
 								Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
 							</p>
 
-							<f:form action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
+							<f:form id="emphasize-form" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
 								<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
 									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 										<div class="row">
@@ -50,10 +59,12 @@
 																<span>{opinion.uidLocal.title}</span>
 															</h5>
 														</div>
-														<span class="emphasize-toggle mr-1">
-															<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="result[opinions][{iterator.cycle}][emphasize]" />
-															<label for="emphasize-{iterator.cycle}"></label>
-														</span>
+														<f:if condition="{opinion.opinion} != 0">
+															<span class="emphasize-toggle mr-1">
+																<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="result[opinions][{iterator.cycle}][emphasize]" />
+																<label for="emphasize-{iterator.cycle}"></label>
+															</span>
+														</f:if>
 														<span class="opinion-wrap">
 															<f:switch expression="{opinion.opinion}">
 																<f:case value="2"><i class="fi flaticon-check"></i></f:case>
@@ -73,13 +84,27 @@
 										</div>
 									</f:for>
 								</div>
-								<nav class="fixed-bottom">
+								<nav class="fixed-bottom hidden-md-up">
 									<f:form.button class="btn btn-lg btn-block btn-inverted">
 										Ergebnisse anzeigen
-										<i class="fi flaticon-arrow flaticon-arrow-reverse"></i>
+										<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
 									</f:form.button>
 								</nav>
 							</f:form>
+						</div>
+					</div>
+					<div class="row mt-3 align-items-center hidden-xs-down">
+						<div class="col-6">
+							<f:link.action action="questionnaire" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}">
+								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+								zurück zu den Thesen
+							</f:link.action>
+						</div>
+						<div class="col-6 text-right">
+							<button onclick="$('#emphasize-form').submit();" class="btn btn-lg btn-primary">
+								Ergebnisse anzeigen
+								<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
+							</button>
 						</div>
 					</div>
 				</main>
