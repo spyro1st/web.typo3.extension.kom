@@ -44,16 +44,18 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
                         if ($resultOpinion->getUidLocal() === $candidateOpinion->getUidLocal()) {
                             $thesisMatch = TRUE;
                             $calculatedResults[$canidate->getUid()]['score'] += $this->calculateOpinion($resultOpinion, $candidateOpinion);
-                            if ($resultOpinion->getEmphasize()) {
-                                $calculatedResults[$canidate->getUid()]['maxScore'] += 4;
-                            } else {
-                                $calculatedResults[$canidate->getUid()]['maxScore'] += 2;
-                            }
                         }
                     }
+
+                    if ($resultOpinion->getEmphasize()) {
+                        $calculatedResults[$canidate->getUid()]['maxScore'] += 4;
+                    } else {
+                        $calculatedResults[$canidate->getUid()]['maxScore'] += 2;
+                    }
+                    
                     if (!$thesisMatch) {
                         // missing opinion counted like skipped
-                        $calculatedResults[$canidate->getUid()] += 0;
+                        $calculatedResults[$canidate->getUid()]['score'] += 0;
                     }
                 }
                 $i++;
