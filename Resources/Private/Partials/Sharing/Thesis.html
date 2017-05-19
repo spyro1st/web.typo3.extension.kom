@@ -2,12 +2,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 	<v:variable.set name="uri" value="{f:uri.action(absolute: 1, action: 'questionnaire', arguments: '{election: election, electionDistrict: electionDistrict}')}"/>
 	<v:variable.set name="uri" value="{uri -> f:format.urlencode()}"/>
+	<v:variable.set name="title" value="Kanidat-O-Mat - {election.title} - {electionDistrict.title} - {thesis.title}"/>
+	<v:variable.set name="title" value="{title -> f:format.urlencode()}"/>
+	<v:variable.set name="description" value="{thesis.description}"/>
+	<v:variable.set name="description" value="{description -> f:format.urlencode()}"/>
 
 	<div class="dropup">
 		<a id="sharing-drop" class="sharing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">{text} <i class="fi flaticon-circle"></i></a>
 		<div class="dropdown-menu" aria-labelledby="sharing-drop">
-			<a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={uri}"><i class="fi flaticon-facebook"></i> Facebook</a>
-			<a class="dropdown-item" target="_blank" href="http://twitter.com/share?url={uri}"><i class="fi flaticon-twitter"></i> Twitter</a>
+			<a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={uri}&title={title}&description={description}"><i class="fi flaticon-facebook"></i> Facebook</a>
+			<a class="dropdown-item" target="_blank" href="http://twitter.com/share?url={uri}&text={title}"><i class="fi flaticon-twitter"></i> Twitter</a>
 			<a class="dropdown-item" target="_blank" href="https://plus.google.com/share?url={uri}"><i class="fi flaticon-google"></i> Google+</a>
 		</div>
 	</div>
