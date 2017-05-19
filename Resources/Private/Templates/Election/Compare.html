@@ -114,7 +114,7 @@
 											<div class="col-12">
 												<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
 													<f:for each="{candidates}" as="candidate" iteration="subiterator">
-														<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: iterator}"/>
+														<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: subiterator}"/>
 													</f:for>
 												</div>
 											</div>
