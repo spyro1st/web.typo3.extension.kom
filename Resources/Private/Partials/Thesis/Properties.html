@@ -43,7 +43,7 @@
 							<f:format.raw>{thesis.description}</f:format.raw>
 						</div>
 						<div>
-							<div class="float-left">
+							<div class="hidden-xs-down float-left">
 								<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
 							</div>
 							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
