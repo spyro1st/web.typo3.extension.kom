@@ -47,13 +47,13 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
                         }
                     }
 
-                    if ($resultOpinion->getEmphasize()) {
-                        $calculatedResults[$canidate->getUid()]['maxScore'] += 4;
+                    if ($thesisMatch && $resultOpinion->getOpinion() != 0) {
+                        if ($resultOpinion->getEmphasize()) {
+                            $calculatedResults[$canidate->getUid()]['maxScore'] += 4;
+                        } else {
+                            $calculatedResults[$canidate->getUid()]['maxScore'] += 2;
+                        }
                     } else {
-                        $calculatedResults[$canidate->getUid()]['maxScore'] += 2;
-                    }
-                    
-                    if (!$thesisMatch) {
                         // missing opinion counted like skipped
                         $calculatedResults[$canidate->getUid()]['score'] += 0;
                     }
@@ -67,7 +67,7 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
             }
         }
 
-        usort($calculatedResults, function($a, $b) {
+        usort($calculatedResults, function ($a, $b) {
             if ($a['percentage'] == $b['percentage']) {
                 return 0;
             }

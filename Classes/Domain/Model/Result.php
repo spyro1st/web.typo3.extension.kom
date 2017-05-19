@@ -39,6 +39,20 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $election = null;
 
     /**
+     * step
+     * 
+     * @var int
+     */
+    protected $step = 0;
+
+    /**
+     * totalSteps
+     * 
+     * @var int
+     */
+    protected $totalSteps = 0;
+
+    /**
      * __construct
      */
     public function __construct()
@@ -144,4 +158,33 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->election = $election;
     }
+
+    /**
+     * @return int
+     */
+    public function getStep() {
+        return $this->step;
+    }
+
+    /**
+     * @param int $step
+     */
+    public function setStep($step) {
+        $this->step = $step;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalSteps() {
+        return $this->totalSteps;
+    }
+
+    /**
+     * @param int $totalSteps
+     */
+    public function setTotalSteps($totalSteps) {
+        $this->totalSteps = $totalSteps;
+    }
+
 }

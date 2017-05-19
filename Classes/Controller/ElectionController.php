@@ -190,6 +190,19 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 
+    /**
+     * Stores initial data to session.
+     * @return void
+     */
+    protected function storeInitalSessionData($data) {
+        $this->sessionData['formData'] = $data;
+
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->sessionDataStorageKey,
+            $this->sessionData);
+
+        $GLOBALS['TSFE']->fe_user->storeSessionData();
+    }
+
     protected function clearSessionData() {
         $this->sessionData = array();
 
@@ -219,24 +232,40 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
         }
 
+        $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
+
         if ($step === 0) {
             $this->clearSessionData();
+            $initialSessionData = [
+                'electionDistrict' => $electionDistrict->getUid(),
+                'election' => $election->getUid(),
+                'step' => 0
+            ];
+            $i = 1;
+            foreach ($thesesMappings->getTheses() as $thesis) {
+                $initialSessionData['result']['opinions'][$i] = [
+                    'uidLocal' => $thesis->getUid(),
+                    'opinion' => 0
+                ];
+                $i++;
+            }
+            $this->storeInitalSessionData($initialSessionData);
             /* @var \DigitalPatrioten\Kom\Domain\Model\Result $result */
             $result = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
             $result->setElection($election);
             $result->setElectionDistrict($electionDistrict);
-        }
-        else {
+        } else {
             $result = $this->createResultObjectFromSession();
         }
-        
+
         if ($step > 1 && $result->getOpinions()->count() == 0) {
             $this->redirectToStart();
         }
 
-        $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
-
         $totalSteps = $thesesMappings->getTheses()->count();
+
+        $result->setStep($step);
+        $result->setTotalSteps($totalSteps);
 
         if ($step === ($totalSteps + 1)) {
             $this->redirect('emphasize', NULL, NULL, ['electionDistrict' => $electionDistrict, 'election' => $election]);
@@ -269,7 +298,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
-     * 
+     *
      * @return void
      */
     public function resultAction(\DigitalPatrioten\Kom\Domain\Model\Result $result = NULL) {
@@ -307,14 +336,13 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * persists the result object from session
-     * 
      * @return \DigitalPatrioten\Kom\Domain\Model\Result
      */
     private function createResultObjectFromSession() {
         $resultData = $this->sessionData['formData'];
-        
-        if(empty($resultData) || !$resultData['election'] || !$resultData['electionDistrict']) {
-           $this->redirectToStart();
+
+        if (empty($resultData) || !$resultData['election'] || !$resultData['electionDistrict']) {
+            $this->redirectToStart();
         }
 
         /* @var \DigitalPatrioten\Kom\Domain\Model\Result $resultObject */
@@ -322,6 +350,8 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $resultObject->setElection($this->electionRepository->findByUid($resultData['election']));
         $resultObject->setElectionDistrict($this->electionDistrictRepository->findByUid($resultData['electionDistrict']));
+        $resultObject->setStep($resultData['step']);
+        $resultObject->setTotalSteps($resultData['totalSteps']);
 
         if ($resultData['result']['opinions']) {
             foreach ($resultData['result']['opinions'] as $opinion) {
@@ -335,7 +365,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 $resultObject->addOpinion($opinionObject);
             }
         }
-        
+
         return $resultObject;
 
 //        $this->resultRepository->add($resultObject);

@@ -21,20 +21,22 @@
 						</f:if>
 
 					</div>
-					<span class="opinion-wrap">
-						<f:switch expression="{candidateOpinion.opinion}">
-							<f:case value="2"><i class="fi flaticon-check"></i></f:case>
-							<f:case value="-1"><i class="fi flaticon-cancel"></i></f:case>
-							<f:case value="1"><i class="fi flaticon-minus"></i></f:case>
-							<f:case value="0"><i class="fi"></i></f:case>
-						</f:switch>
-					</span>
+					<f:if condition="{candidateOpinion.opinion} != 0">
+						<span class="opinion-wrap">
+							<f:switch expression="{candidateOpinion.opinion}">
+								<f:case value="2"><i class="fi flaticon-check"></i></f:case>
+								<f:case value="-1"><i class="fi flaticon-cancel"></i></f:case>
+								<f:case value="1"><i class="fi flaticon-minus"></i></f:case>
+								<f:case value="0"><i class="fi"></i></f:case>
+							</f:switch>
+						</span>
+					</f:if>
 				</span>
 			</div>
 
 			<f:if condition="{candidateOpinion.explanation}">
 				<div id="collapse-{iterator.cycle}" class="collapse thesis-collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
-					<p>{candidateOpinion.explanation}</p>
+					<p><f:format.raw>{candidateOpinion.explanation}</f:format.raw></p>
 				</div>
 			</f:if>
 			<hr/>

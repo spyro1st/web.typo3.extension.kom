@@ -25,7 +25,8 @@
 									</div>
 								</f:else>
 							</f:if>
-							<f:if condition="{opinion.opinion}">
+							<f:if condition="{opinion.uidLocal}">
+								<f:render partial="Sharing/Header" arguments="{electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
 								<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 									<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 									<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="{opinion.opinion}">
@@ -39,9 +40,12 @@
 						</div>
 						<div class="thesis-balloon">
 							<h2>{thesis.title}</h2>
-							{thesis.description}
+							<f:format.raw>{thesis.description}</f:format.raw>
 						</div>
 						<div>
+							<div class="float-left">
+								<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
+							</div>
 							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
 								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="skip-thesis float-right" name="result[opinions][{step}][opinion]" value="0">
@@ -94,6 +98,11 @@
 								</span>
 								</f:form.button>
 							</f:form>
+						</div>
+					</div>
+					<div class="row justify-content-center mt-3 hidden-md-up">
+						<div class="col col-auto">
+							<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
 						</div>
 					</div>
 				</div>
