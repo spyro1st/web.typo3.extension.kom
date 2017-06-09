@@ -61,23 +61,27 @@
 			</div>
 			<div class="row my-3">
 				<div class="col-12">
-					<div class="row">
-						<div class="col-12 col-sm-4 d-flex">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
-								<span class="d-flex align-items-center">
-									ich stimme zu
-									<span class="opinion-wrap">
-										<i class="fi flaticon-check"></i>
-									</span>
-								</span>
-								</f:form.button>
-							</f:form>
+					<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+						<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+						<div class="row">
+							<div class="col col-auto mx-auto mb-1">
+								<f:form.checkbox id="emphasize-{step}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
+								<label for="emphasize-{step}"></label>
+								These gewichten
+							</div>
 						</div>
-						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+						<div class="row">
+							<div class="col-12 col-sm-4 d-flex">
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
+							<span class="d-flex align-items-center">
+								ich stimme zu
+								<span class="opinion-wrap">
+									<i class="fi flaticon-check"></i>
+								</span>
+							</span>
+								</f:form.button>
+							</div>
+							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
 								<span class="d-flex align-items-center">
 									ich stimme nicht zu
@@ -86,11 +90,9 @@
 									</span>
 								</span>
 								</f:form.button>
-							</f:form>
-						</div>
-						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+							</div>
+							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
+
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									neutral
@@ -99,9 +101,9 @@
 									</span>
 								</span>
 								</f:form.button>
-							</f:form>
+							</div>
 						</div>
-					</div>
+					</f:form>
 					<div class="row justify-content-center mt-3 hidden-md-up">
 						<div class="col col-auto">
 							<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>

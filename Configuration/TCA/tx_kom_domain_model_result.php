@@ -11,7 +11,8 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'election_distric,election',
-        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_result.gif'
+        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_result.gif',
+        'hideTable' => 1,
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, step, total_steps, session_id',
