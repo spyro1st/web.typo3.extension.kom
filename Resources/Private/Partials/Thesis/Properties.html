@@ -27,9 +27,9 @@
 							</f:if>
 							<f:if condition="{opinion.uidLocal}">
 								<f:render partial="Sharing/Header" arguments="{electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
-								<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-									<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-									<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="{opinion.opinion}">
+								<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+									<f:form.button class="unstyled" name="resultObject[opinions][{step}][opinion]" value="{opinion.opinion}">
 										<i class="fi flaticon-arrow2"></i>
 									</f:form.button>
 								</f:form>
@@ -39,16 +39,18 @@
 							</div>
 						</div>
 						<div class="thesis-balloon">
-							<h2>{thesis.title}</h2>
-							<f:format.raw>{thesis.description}</f:format.raw>
+							<div class="content">
+								<h2>{thesis.title}</h2>
+								<f:format.raw>{thesis.description}</f:format.raw>
+							</div>
 						</div>
 						<div>
 							<div class="hidden-xs-down float-left">
 								<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
 							</div>
-							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="skip-thesis float-right" name="result[opinions][{step}][opinion]" value="0">
+							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
 									These überspringen
 									<i class="fi flaticon-arrow2"></i>
 								</f:form.button>
@@ -61,9 +63,9 @@
 				<div class="col-12">
 					<div class="row">
 						<div class="col-12 col-sm-4 d-flex">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="result[opinions][{step}][opinion]" value="2">
+							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
 								<span class="d-flex align-items-center">
 									ich stimme zu
 									<span class="opinion-wrap">
@@ -74,9 +76,9 @@
 							</f:form>
 						</div>
 						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="result[opinions][{step}][opinion]" value="-1">
+							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
 								<span class="d-flex align-items-center">
 									ich stimme nicht zu
 									<span class="opinion-wrap">
@@ -87,9 +89,9 @@
 							</f:form>
 						</div>
 						<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-								<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="result[opinions][{step}][opinion]" value="1">
+							<f:form class="w-100" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
 								<span class="d-flex align-items-center">
 									neutral
 									<span class="opinion-wrap">

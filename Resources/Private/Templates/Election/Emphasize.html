@@ -43,7 +43,7 @@
 								Der Kandidat-O-Mat wertet von Ihnen mit einem Stern markierte Thesen um ein genaueres Ergebnis zu erreichen.
 							</p>
 
-							<f:form id="emphasize-form" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
+							<f:form id="emphasize-form" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{resultObject}" objectName="resultObject">
 								<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
 									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 										<div class="row">
@@ -61,7 +61,7 @@
 														</div>
 														<f:if condition="{opinion.opinion} != 0">
 															<span class="emphasize-toggle mr-1">
-																<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="result[opinions][{iterator.cycle}][emphasize]" />
+																<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{iterator.cycle}][emphasize]" />
 																<label for="emphasize-{iterator.cycle}"></label>
 															</span>
 														</f:if>

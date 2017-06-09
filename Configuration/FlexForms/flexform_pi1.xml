@@ -21,6 +21,10 @@
 										<numIndex index="0">Questionnaire</numIndex>
 										<numIndex index="1">Election->questionnaire;Election->emphasize;Election->result;Election->compare</numIndex>
 									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">Result Count</numIndex>
+										<numIndex index="1">Result->count</numIndex>
+									</numIndex>
 								</items>
 							</config>
 						</TCEforms>

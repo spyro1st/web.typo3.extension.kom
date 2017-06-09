@@ -40,9 +40,9 @@
 					<f:if condition="{step} > 0">
 						<div class="col col-auto align-self-center">
 							<f:if condition="{opinion.opinion}">
-								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{result}" objectName="result">
-									<f:form.hidden name="result[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-									<f:form.button class="unstyled" name="result[opinions][{step}][opinion]" value="{opinion.opinion}">
+								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+									<f:form.button class="unstyled" name="resultObject[opinions][{step}][opinion]" value="{opinion.opinion}">
 										<i class="fi flaticon-arrow2"></i>
 									</f:form.button>
 								</f:form>

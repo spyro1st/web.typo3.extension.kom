@@ -53,6 +53,14 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $totalSteps = 0;
 
     /**
+     * sessionId
+     *
+     * @var string
+     */
+    protected $sessionId = '';
+
+
+    /**
      * __construct
      */
     public function __construct()
@@ -185,6 +193,20 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setTotalSteps($totalSteps) {
         $this->totalSteps = $totalSteps;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionId() {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param string $sessionId
+     */
+    public function setSessionId($sessionId) {
+        $this->sessionId = $sessionId;
     }
 
 }

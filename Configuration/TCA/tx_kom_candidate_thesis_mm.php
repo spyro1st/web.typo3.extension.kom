@@ -8,10 +8,10 @@ return [
         'iconfile' => 'EXT:kom/Resources/Public/Icons/relation.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'uid_local, uid_foreign, opinion, explanation',
+        'showRecordFieldList' => 'uid_local, uid_foreign, opinion, emphasize, explanation',
     ],
     'types' => [
-        '1' => ['showitem' => 'uid_local, uid_foreign, opinion, explanation'],
+        '1' => ['showitem' => 'uid_local, uid_foreign, opinion, emphasize, explanation'],
     ],
     'columns' => [
         'uid_local' => [
@@ -46,6 +46,18 @@ return [
                     ['Neutral', '1'],
                     ['Negative', '-1'],
                 )
+            ],
+        ],
+        'emphasize' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_candidate_thesis_mm.emphasize',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    '1' => [
+                        '0' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_candidate_thesis_mm.emphasize.enabled'
+                    ]
+                ],
             ],
         ],
         'explanation' => [

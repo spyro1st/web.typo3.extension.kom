@@ -33,6 +33,12 @@ class CandidateOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * emphasize
+     * @var bool
+     */
+    protected $emphasize = false;
+
+    /**
+     * emphasize
      * @var string
      */
     protected $explanation = '';
@@ -82,6 +88,20 @@ class CandidateOpinion extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setOpinion($opinion) {
         $this->opinion = $opinion;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmphasize() {
+        return $this->emphasize;
+    }
+
+    /**
+     * @param bool $emphasize
+     */
+    public function setEmphasize($emphasize) {
+        $this->emphasize = $emphasize;
     }
 
     /**

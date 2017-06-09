@@ -99,6 +99,13 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     protected $resultRepository = NULL;
 
     /**
+     * resultOpinionRepository
+     * @var \DigitalPatrioten\Kom\Domain\Repository\ResultOpinionRepository
+     * @inject
+     */
+    protected $resultOpinionRepository = NULL;
+
+    /**
      * candidateRepository
      * @var \DigitalPatrioten\Kom\Domain\Repository\CandidateRepository
      * @inject
@@ -217,7 +224,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @param \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict
      * @param \DigitalPatrioten\Kom\Domain\Model\Election $election
-     * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $resultObject
      * @param int $step
      *
      * @return void
@@ -225,7 +232,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     public function questionnaireAction(
         \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict,
         \DigitalPatrioten\Kom\Domain\Model\Election $election = NULL,
-        \DigitalPatrioten\Kom\Domain\Model\Result $result = NULL,
+        \DigitalPatrioten\Kom\Domain\Model\Result $resultObject = NULL,
         $step = 0
     ) {
         if (!$election) {
@@ -233,17 +240,20 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
 
         $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
+        $totalSteps = $thesesMappings->getTheses()->count();
 
         if ($step === 0) {
             $this->clearSessionData();
             $initialSessionData = [
                 'electionDistrict' => $electionDistrict->getUid(),
                 'election' => $election->getUid(),
-                'step' => 0
+                'step' => 0,
+                'totalSteps' => $totalSteps,
+                'sessionId' => \TYPO3\CMS\Core\Utility\StringUtility::getUniqueId()
             ];
             $i = 1;
             foreach ($thesesMappings->getTheses() as $thesis) {
-                $initialSessionData['result']['opinions'][$i] = [
+                $initialSessionData['resultObject']['opinions'][$i] = [
                     'uidLocal' => $thesis->getUid(),
                     'opinion' => 0
                 ];
@@ -261,8 +271,6 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         if ($step > 1 && $result->getOpinions()->count() == 0) {
             $this->redirectToStart();
         }
-
-        $totalSteps = $thesesMappings->getTheses()->count();
 
         if ($step > ($totalSteps + 1)) {
             $this->redirect('questionnaire', NULL, NULL, ['electionDistrict' => $electionDistrict, 'election' => $election, 'step' => $totalSteps]);
@@ -301,11 +309,11 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     }
 
     /**
-     * @param \DigitalPatrioten\Kom\Domain\Model\Result $result
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $resultObject
      *
      * @return void
      */
-    public function resultAction(\DigitalPatrioten\Kom\Domain\Model\Result $result = NULL) {
+    public function resultAction(\DigitalPatrioten\Kom\Domain\Model\Result $resultObject = NULL) {
         $result = $this->createResultObjectFromSession();
 
         /* @var \DigitalPatrioten\Kom\Service\ResultService $result */
@@ -350,36 +358,48 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
 
         /* @var \DigitalPatrioten\Kom\Domain\Model\Result $resultObject */
-        $resultObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
+        if(!$resultObject = $this->resultRepository->findOneBySessionId($resultData['sessionId'])) {
+            $resultObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
+            $resultObject->setElection($this->electionRepository->findByUid($resultData['election']));
+            $resultObject->setElectionDistrict($this->electionDistrictRepository->findByUid($resultData['electionDistrict']));
+            $resultObject->setStep($resultData['step']);
+            $resultObject->setTotalSteps($resultData['totalSteps']);
+            $resultObject->setSessionId($resultData['sessionId']);
 
-        $resultObject->setElection($this->electionRepository->findByUid($resultData['election']));
-        $resultObject->setElectionDistrict($this->electionDistrictRepository->findByUid($resultData['electionDistrict']));
-        $resultObject->setStep($resultData['step']);
-        $resultObject->setTotalSteps($resultData['totalSteps']);
+            $this->persistsResultObject($resultObject);
 
-        if ($resultData['result']['opinions']) {
-            foreach ($resultData['result']['opinions'] as $opinion) {
-                /* @var \DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinionObject */
-                $opinionObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\ResultOpinion');
-                $opinionObject->setUidLocal($this->thesisRepository->findByUid($opinion['uidLocal']));
-                $opinionObject->setUidForeign($resultObject);
-                $opinionObject->setOpinion($opinion['opinion']);
-                $opinionObject->setEmphasize($opinion['emphasize']);
+            if ($resultData['resultObject']['opinions']) {
+                foreach ($resultData['resultObject']['opinions'] as $opinion) {
+                    /* @var \DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinionObject */
+                    $opinionObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\ResultOpinion');
+                    $opinionObject->setUidLocal($this->thesisRepository->findByUid($opinion['uidLocal']));
+                    $opinionObject->setUidForeign($resultObject);
+                    $opinionObject->setOpinion($opinion['opinion']);
+                    $opinionObject->setEmphasize($opinion['emphasize']);
 
-                $resultObject->addOpinion($opinionObject);
+                    $resultObject->addOpinion($opinionObject);
+                }
             }
+
+            $this->persistsResultObject($resultObject);
         }
 
-        return $resultObject;
+        $resultObject->setStep($resultData['step']);
+        $resultObject->setTotalSteps($resultData['totalSteps']);
+        
+        $i = 0;
+        foreach ($resultObject->getOpinions() as $opinion) {
+            $i++;
+            if ($resultData['resultObject']['opinions']) {
+                $opinion->setOpinion($resultData['resultObject']['opinions'][$i]['opinion']);
+                $opinion->setEmphasize($resultData['resultObject']['opinions'][$i]['emphasize']);
+                $this->resultOpinionRepository->update($opinion);
+            }
+        }
+        
+        $this->persistsResultObject($resultObject);
 
-//        $this->resultRepository->add($resultObject);
-//
-//        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
-//        $persistenceManager->persistAll();
-//
-//        $this->clearSessionData();
-//
-//        $this->redirect('emphasize', NULL, NULL, ['result' => $resultObject]);
+        return $resultObject;
     }
 
     /**
@@ -392,5 +412,17 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             ->setTargetPageUid($pageUid)
             ->build();
         $this->redirectToUri($uri, 0, 404);
+    }
+    
+    protected function persistsResultObject(\DigitalPatrioten\Kom\Domain\Model\Result $resultObject) {
+        if ($resultObject->getUid()) {
+            $this->resultRepository->update($resultObject);
+        }
+        else {
+            $this->resultRepository->add($resultObject);
+        }
+
+        $persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
+        $persistenceManager->persistAll();
     }
 }

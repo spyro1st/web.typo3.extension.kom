@@ -14,10 +14,10 @@ return [
         'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_result.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, step, total_steps, session_id',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, step, total_steps, session_id'],
     ],
     'columns' => [
         'hidden' => [
@@ -71,6 +71,31 @@ return [
                     'showPossibleLocalizationRecords' => 1,
                     'showAllLocalizationLink' => 1
                 ]
+            ],
+        ],
+        'step' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_result.step',
+            'config' => [
+                'type' => 'input',
+                'size' => 3,
+                'default' => 0,
+            ]
+        ],
+        'total_steps' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_result.total_steps',
+            'config' => [
+                'type' => 'input',
+                'size' => 3,
+                'default' => 0,
+            ]
+        ],
+        'session_id' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_result.session_id',
+            'config' => [
+                'type' => 'passthrough'
             ],
         ],
     ],

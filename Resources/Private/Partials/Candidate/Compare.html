@@ -19,8 +19,12 @@
 								</h5>
 							</f:else>
 						</f:if>
-
 					</div>
+					<f:if condition="{candidateOpinion.emphasize}">
+						<span class="opinion-wrap mr-1">
+							<i class="fi flaticon-star"></i>
+					</span>
+					</f:if>
 					<f:if condition="{candidateOpinion.opinion} != 0">
 						<span class="opinion-wrap">
 							<f:switch expression="{candidateOpinion.opinion}">

@@ -180,6 +180,9 @@ CREATE TABLE tx_kom_domain_model_result (
 	election int(11) unsigned DEFAULT '0' NOT NULL,
 	election_district int(11) unsigned DEFAULT '0' NOT NULL,
 	opinions int(11) unsigned DEFAULT '0' NOT NULL,
+	step int(11) DEFAULT '0' NOT NULL,
+	total_steps int(11) DEFAULT '0' NOT NULL,
+	session_id varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -273,6 +276,7 @@ CREATE TABLE tx_kom_candidate_thesis_mm (
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	opinion tinytext NOT NULL,
 	explanation text NOT NULL,
+	emphasize tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
