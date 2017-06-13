@@ -61,7 +61,12 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 $i++;
                 foreach ($canidates as $canidate) {
                     if ($i === $resultOpinionsCount) {
-                        $calculatedResults[$canidate->getUid()]['percentage'] = ($calculatedResults[$canidate->getUid()]['score'] / $calculatedResults[$canidate->getUid()]['maxScore']) * 100;
+                        if ($calculatedResults[$canidate->getUid()]['maxScore'] > 0) {
+                            $calculatedResults[$canidate->getUid()]['percentage'] = ($calculatedResults[$canidate->getUid()]['score'] / $calculatedResults[$canidate->getUid()]['maxScore']) * 100;
+                        }
+                        else {
+                            $calculatedResults[$canidate->getUid()]['percentage'] = 0;
+                        }
                     }
                 }
             }
