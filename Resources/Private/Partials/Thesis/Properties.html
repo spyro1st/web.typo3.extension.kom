@@ -45,9 +45,6 @@
 							</div>
 						</div>
 						<div>
-							<div class="hidden-xs-down float-left">
-								<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
-							</div>
 							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
@@ -64,47 +61,50 @@
 					<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 						<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
 						<div class="row">
-							<div class="col col-auto mx-auto mb-1">
-								<f:form.checkbox id="emphasize-{step}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
-								<label for="emphasize-{step}"></label>
-								These gewichten
+							<div class="col col-auto mx-auto mb-3">
+								<span class="d-flex align-items-center">
+									<span class="emphasize-toggle mr-1">
+										<f:form.checkbox id="emphasize-{step}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
+										<label for="emphasize-{step}"></label>
+									</span>
+									These gewichten
+								</span>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-12 col-sm-4 d-flex">
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
-							<span class="d-flex align-items-center">
-								ich stimme zu
-								<span class="opinion-wrap">
-									<i class="fi flaticon-check"></i>
-								</span>
-							</span>
+									<span class="d-flex align-items-center">
+										ich stimme zu
+										<span class="opinion-wrap">
+											<i class="fi flaticon-check"></i>
+										</span>
+									</span>
 								</f:form.button>
 							</div>
 							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
-								<span class="d-flex align-items-center">
-									ich stimme nicht zu
-									<span class="opinion-wrap">
-										<i class="fi flaticon-cancel"></i>
+									<span class="d-flex align-items-center">
+										ich stimme nicht zu
+										<span class="opinion-wrap">
+											<i class="fi flaticon-cancel"></i>
+										</span>
 									</span>
-								</span>
 								</f:form.button>
 							</div>
 							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
-								<span class="d-flex align-items-center">
-									neutral
-									<span class="opinion-wrap">
-										<i class="fi flaticon-minus"></i>
+									<span class="d-flex align-items-center">
+										neutral
+										<span class="opinion-wrap">
+											<i class="fi flaticon-minus"></i>
+										</span>
 									</span>
-								</span>
 								</f:form.button>
 							</div>
 						</div>
 					</f:form>
-					<div class="row justify-content-center mt-3 hidden-md-up">
+					<div class="row justify-content-center mt-3">
 						<div class="col col-auto">
 							<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
 						</div>
