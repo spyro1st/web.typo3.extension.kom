@@ -44,14 +44,32 @@
 								<f:format.raw>{thesis.description}</f:format.raw>
 							</div>
 						</div>
-						<div>
-							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
-									These überspringen
-									<i class="fi flaticon-arrow2"></i>
-								</f:form.button>
-							</f:form>
+						<div class="row d-flex align-items-center">
+							<div class="col col-auto ml-auto ml-md-0 mr-md-auto">
+								<span class="d-flex align-items-center">
+									<span class="emphasize-toggle mr-1">
+										<input
+											type="checkbox"
+											id="emphasize-toggle-{step}"
+											class="checkbox-star"
+											value="1"
+											onchange="$('#emphasize-{step}').prop('checked', this.checked);"
+											{f:if(condition: '{opinion.emphasize}', then: ' checked="checked"')}
+										/>
+										<label for="emphasize-toggle-{step}"></label>
+									</span>
+									These gewichten
+								</span>
+							</div>
+							<div class="col col-auto ml-auto hidden-xs-down">
+								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+									<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
+										These überspringen
+										<i class="fi flaticon-arrow2"></i>
+									</f:form.button>
+								</f:form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -60,17 +78,7 @@
 				<div class="col-12">
 					<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 						<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-						<div class="row">
-							<div class="col col-auto mx-auto mb-3">
-								<span class="d-flex align-items-center">
-									<span class="emphasize-toggle mr-1">
-										<f:form.checkbox id="emphasize-{step}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
-										<label for="emphasize-{step}"></label>
-									</span>
-									These gewichten
-								</span>
-							</div>
-						</div>
+						<f:form.checkbox id="emphasize-{step}" class="invisible" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
 						<div class="row">
 							<div class="col-12 col-sm-4 d-flex">
 								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
@@ -105,8 +113,17 @@
 						</div>
 					</f:form>
 					<div class="row justify-content-center mt-3">
-						<div class="col col-auto">
+						<div class="col col-auto mr-auto mr-md-0">
 							<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
+						</div>
+						<div class="col col-auto hidden-md-up ml-auto">
+							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
+									These überspringen
+									<i class="fi flaticon-arrow2"></i>
+								</f:form.button>
+							</f:form>
 						</div>
 					</div>
 				</div>
