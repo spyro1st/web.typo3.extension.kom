@@ -64,6 +64,7 @@
 							<div class="col col-auto ml-auto hidden-xs-down">
 								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+									<f:form.hidden name="resultObject[opinions][{step}][emphasize]" value="0" />
 									<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
 										These überspringen
 										<i class="fi flaticon-arrow2"></i>
@@ -119,6 +120,7 @@
 						<div class="col col-auto hidden-md-up ml-auto">
 							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
+								<f:form.hidden name="resultObject[opinions][{step}][emphasize]" value="0" />
 								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
 									These überspringen
 									<i class="fi flaticon-arrow2"></i>
