@@ -46,7 +46,7 @@
 						</div>
 						<div class="row d-flex align-items-center">
 							<div class="col col-auto ml-auto ml-md-0 mr-md-auto">
-								<span class="d-flex align-items-center">
+								<span class="d-flex align-items-center emphasize-toggle-wrap">
 									<span class="emphasize-toggle mr-1">
 										<input
 											type="checkbox"
@@ -58,7 +58,7 @@
 										/>
 										<label for="emphasize-toggle-{step}"></label>
 									</span>
-									These gewichten
+									<span onclick="$(this).prev().children('input').click();" class="emphasize-toggle-label">These gewichten</span>
 								</span>
 							</div>
 							<div class="col col-auto ml-auto hidden-xs-down">
