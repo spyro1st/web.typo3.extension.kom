@@ -158,9 +158,12 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * We use initializeView to determin if a certain action has been reached
      * and all it's validation has been passed successful.
+     *
+     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     *
      * @return void
      */
-    protected function initializeView() {
+    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
         $this->passedActionMethodNames[$this->actionMethodName] = TRUE;
         $this->storeSessionData();
     }
