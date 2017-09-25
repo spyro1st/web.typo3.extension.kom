@@ -19,6 +19,7 @@ class ElectionDistrictRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
 {
     public function findByActiveElection() {
         $currentDate = new \DateTime();
+        $currentDate->setTime(0, 0, 0);
         $query = $this->createQuery();
         $query->matching(
             $query->greaterThanOrEqual('elections.date', $currentDate)

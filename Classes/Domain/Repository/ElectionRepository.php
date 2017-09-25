@@ -27,6 +27,7 @@ class ElectionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findFirstActiveByElectionDistrict(\DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict) {
         $currentDate = new \DateTime();
+        $currentDate->setTime(0, 0, 0);
         $query = $this->createQuery();
         $query->matching(
             $query->logicalAnd(
