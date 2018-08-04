@@ -1,0 +1,57 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:layout name="Default"/>
+	<f:section name="main">
+
+		<f:flashMessages/>
+		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}"/>
+
+		<f:form id="selection-form" pageUid="{settings.resultPid}" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{resultObject}" objectName="resultObject">
+			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+				<f:for each="{candidates}" as="candidate" iteration="iterator">
+					<div class="row">
+						<div class="col-4 col-md-2">
+							<f:if condition="{candidate.image}">
+								<f:then>
+									<f:image src="{candidate.image.uid}" width="100c" height="100c" class="img-fluid rounded-circle" alt="{candidate.fullName}" treatIdAsReference="TRUE"/>
+								</f:then>
+								<f:else>
+									<f:image src="" width="100c" height="100c" class="img-fluid rounded-circle" alt="{candidate.fullName}"/>
+								</f:else>
+							</f:if>
+						</div>
+						<div class="col-5 col-md-8">
+							<h5 class="py-1">
+								{candidate.fullName}
+							</h5>
+							<p>
+								<f:format.raw>{candidate.description}</f:format.raw>
+							</p>
+						</div>
+					</div>
+				</f:for>
+			</div>
+			<nav class="fixed-bottom hidden-md-up">
+				<f:form.button class="btn btn-lg btn-block btn-inverted">
+					Ergebnisse anzeigen
+					<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
+				</f:form.button>
+			</nav>
+		</f:form>
+
+		<div class="row mt-3 align-items-center hidden-xs-down">
+			<div class="col-6">
+				<f:link.action pageUid="{settings.emphasizePid}" action="emphasize" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}" class="text-gray-dark">
+					<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+					zurück zur Gewichtung
+				</f:link.action>
+			</div>
+			<div class="col-6 text-right">
+				<button onclick="$('#emphasize-form').submit();" class="btn btn-lg btn-primary">
+					Ergebnisse anzeigen
+					<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
+				</button>
+			</div>
+		</div>
+	</f:section>
+</html>

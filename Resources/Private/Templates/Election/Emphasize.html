@@ -4,51 +4,14 @@
 	<f:section name="main">
 
 		<f:flashMessages/>
-		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}" />
+		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}"/>
 
-		<div class="sticky-top hidden-md-up">
-			<nav class="navbar navbar-inverse bg-primary">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col col-auto align-self-center">
-							<f:link.action action="questionnaire" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}">
-								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-							</f:link.action>
-						</div>
-						<div class="col col-auto navbar-brand">
-							Thesen gewichten
-						</div>
-						<div class="col col-auto align-self-center"></div>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<div class="hidden-xs-down">
-			<div class="sticky-top">
-				<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
-			</div>
-		</div>
-
-		<div class="content__main--wrapper">
-			<div class="content__main">
-				<main class="container pt-3">
+		<f:form id="emphasize-form" pageUid="{settings.selectionPid}" action="selection" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{resultObject}" objectName="resultObject">
+			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+				<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 					<div class="row">
-						<div class="col-12 mt-3">
-							
-							<h1 class="hidden-xs-down">
-								Welche Thesen sind Ihnen besonders wichtig?
-							</h1>
-
-							<p class="pb-3">
-								Thesen, die für Sie besondere Bedeutung haben, können Sie markieren und doppelt gewichten. Die Gewichtung wird bei der Auswertung berücksichtigt.
-							</p>
-
-							<f:form id="emphasize-form" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{resultObject}" objectName="resultObject">
-								<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
-									<f:for each="{result.opinions}" as="opinion" iteration="iterator">
-										<div class="row">
-											<div class="col-12">
-												<div class="thesis-emphasize{f:if(condition: '{opinion.emphasize}', then: ' emphasized')}" role="tab" id="heading-{iterator.cycle}">
+						<div class="col-12">
+							<div class="thesis-emphasize{f:if(condition: '{opinion.emphasize}', then: ' emphasized')}" role="tab" id="heading-{iterator.cycle}">
 													<span class="d-flex align-items-center">
 														<div class="w-100">
 															<small>These {iterator.cycle}</small>
@@ -61,7 +24,7 @@
 														</div>
 														<f:if condition="{opinion.opinion} != 0">
 															<span class="emphasize-toggle mr-1">
-																<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{iterator.cycle}][emphasize]" />
+																<f:form.checkbox id="emphasize-{iterator.cycle}" class="checkbox-star" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{iterator.cycle}][emphasize]"/>
 																<label for="emphasize-{iterator.cycle}"></label>
 															</span>
 														</f:if>
@@ -76,40 +39,38 @@
 															</span>
 														</f:if>
 													</span>
-												</div>
+							</div>
 
-												<div id="collapse-{iterator.cycle}" class="collapse thesis-collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
-													<div><f:format.raw>{opinion.uidLocal.description}</f:format.raw></div>
-												</div>
-												<hr/>
-											</div>
-										</div>
-									</f:for>
+							<div id="collapse-{iterator.cycle}" class="collapse thesis-collapse" role="tabpanel" aria-labelledby="heading-{iterator.cycle}">
+								<div>
+									<f:format.raw>{opinion.uidLocal.description}</f:format.raw>
 								</div>
-								<nav class="fixed-bottom hidden-md-up">
-									<f:form.button class="btn btn-lg btn-block btn-inverted">
-										Ergebnisse anzeigen
-										<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
-									</f:form.button>
-								</nav>
-							</f:form>
+							</div>
+							<hr/>
 						</div>
 					</div>
-					<div class="row mt-3 align-items-center hidden-xs-down">
-						<div class="col-6">
-							<f:link.action action="questionnaire" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}" class="text-gray-dark">
-								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-								zurück zu den Thesen
-							</f:link.action>
-						</div>
-						<div class="col-6 text-right">
-							<button onclick="$('#emphasize-form').submit();" class="btn btn-lg btn-primary">
-								Ergebnisse anzeigen
-								<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
-							</button>
-						</div>
-					</div>
-				</main>
+				</f:for>
+			</div>
+			<nav class="fixed-bottom hidden-md-up">
+				<f:form.button class="btn btn-lg btn-block btn-inverted">
+					Kandidaten auswählen
+					<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
+				</f:form.button>
+			</nav>
+		</f:form>
+
+		<div class="row mt-3 align-items-center hidden-xs-down">
+			<div class="col-6">
+				<f:link.action pageUid="{settings.questionnairePid}" action="questionnaire" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict, step: totalSteps}'}" class="text-gray-dark">
+					<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+					zurück zu den Thesen
+				</f:link.action>
+			</div>
+			<div class="col-6 text-right">
+				<button onclick="$('#emphasize-form').submit();" class="btn btn-lg btn-primary">
+					Kandidaten auswählen
+					<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3"></i>
+				</button>
 			</div>
 		</div>
 	</f:section>

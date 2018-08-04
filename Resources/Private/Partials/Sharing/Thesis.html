@@ -2,7 +2,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 	<v:variable.set name="uri" value="{f:uri.action(absolute: 1, action: 'questionnaire', arguments: '{election: election, electionDistrict: electionDistrict}')}"/>
 	<v:variable.set name="uri" value="{uri -> f:format.urlencode()}"/>
-	<v:variable.set name="title" value="Kanidat-O-Mat / Niedersachs-O-Mat - {election.title} - {electionDistrict.title} - {thesis.title}"/>
+	<v:variable.set name="title" value="Kanidat-O-Mat - {election.title} - {electionDistrict.title} - {thesis.title}"/>
 	<v:variable.set name="title" value="{title -> f:format.urlencode()}"/>
 	<v:variable.set name="description" value="{thesis.description}"/>
 	<v:variable.set name="description" value="{description -> f:format.urlencode()}"/>

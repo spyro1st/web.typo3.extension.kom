@@ -283,7 +283,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $result->setTotalSteps($totalSteps);
 
         if ($step === ($totalSteps + 1)) {
-            $this->redirect('emphasize', NULL, NULL, ['electionDistrict' => $electionDistrict, 'election' => $election]);
+            $this->redirect('emphasize', NULL, NULL, ['electionDistrict' => $electionDistrict, 'election' => $election], $this->settings['emphasizePid']);
         }
 
         $this->view->assignMultiple(
@@ -306,6 +306,23 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $this->view->assignMultiple(
             [
+                'result' => $result
+            ]
+        );
+    }
+
+    /**
+     * @param \DigitalPatrioten\Kom\Domain\Model\Result $resultObject
+     *
+     * @return void
+     */
+    public function selectionAction(\DigitalPatrioten\Kom\Domain\Model\Result $resultObject = NULL) {
+        $result = $this->createResultObjectFromSession();
+        $candidates = $this->candidateRepository->findByElectionDistrictAndElection($result->getElectionDistrict(), $result->getElection());
+
+        $this->view->assignMultiple(
+            [
+                'candidates' => $candidates,
                 'result' => $result
             ]
         );
@@ -345,6 +362,55 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             [
                 'result' => $result,
                 'candidates' => $candidates
+            ]
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function navigationAction() {
+        $arguments = $this->request->getArguments();
+        $step = $arguments['step'] ? $arguments['step'] : 0;
+        $electionDistrict = $this->electionDistrictRepository->findByUid($arguments['electionDistrict']);
+        $election = $this->electionRepository->findFirstActiveByElectionDistrict($electionDistrict);
+        $thesesMappings = $this->electiondistrictElectionMappingRepository->findByElectionAndElectionDistrict($election, $electionDistrict);
+        $totalSteps = $thesesMappings->getTheses()->count();
+
+        if ($step === 0) {
+//            $this->clearSessionData();
+            $initialSessionData = [
+                'electionDistrict' => $electionDistrict->getUid(),
+                'election' => $election->getUid(),
+                'step' => 0,
+                'totalSteps' => $totalSteps,
+                'sessionId' => \TYPO3\CMS\Core\Utility\StringUtility::getUniqueId()
+            ];
+            $i = 1;
+            foreach ($thesesMappings->getTheses() as $thesis) {
+                $initialSessionData['resultObject']['opinions'][$i] = [
+                    'uidLocal' => $thesis->getUid(),
+                    'opinion' => 0
+                ];
+                $i++;
+            }
+//            $this->storeInitalSessionData($initialSessionData);
+            /* @var \DigitalPatrioten\Kom\Domain\Model\Result $result */
+            $result = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
+            $result->setElection($election);
+            $result->setElectionDistrict($electionDistrict);
+        } else {
+            $result = $this->createResultObjectFromSession();
+        }
+
+        $result->setStep($step);
+        $result->setTotalSteps($totalSteps);
+
+        $this->view->assignMultiple(
+            [
+                'result' => $result,
+                'thesesMappings' => $thesesMappings,
+                'action' => $arguments['action']
             ]
         );
     }

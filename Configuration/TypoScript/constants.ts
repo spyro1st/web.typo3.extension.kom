@@ -16,8 +16,18 @@ plugin.tx_kom {
   settings {
     # cat=plugin.tx_kom//a; type=string; label=Home Page PID
     homePid = 1
-    # cat=plugin.tx_kom//a; type=string; label=Plugin Page PID
-    questionnairePid = 2
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Start Page PID
+    questionnaireStartPid = 3
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Question Page PID
+    questionnairePid = 4
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Emphasize Page PID
+    emphasizePid = 5
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Result Page PID
+    resultPid = 6
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Compare Page PID
+    comparePid = 7
+    # cat=plugin.tx_kom//a; type=string; label=Plugin Selection Page PID
+    selectionPid = 8
   }
 }
 

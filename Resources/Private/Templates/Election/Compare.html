@@ -5,86 +5,48 @@
 
 		<f:flashMessages/>
 
-		<div class="sticky-top hidden-md-up">
-			<nav class="navbar navbar-inverse bg-primary">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col col-auto align-self-center">
-							<f:link.action action="result" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}">
-								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-							</f:link.action>
-						</div>
-						<div class="col col-auto navbar-brand">
-							Antworten vergleichen
-						</div>
-						<div class="col col-auto align-self-center"></div>
-					</div>
+		<div id="theses-carousel" class="carousel slide" data-interval="false">
+			<div class="row mb-3 hidden-md-up justify-content-between carousel-navigation">
+				<div class="col col-auto">
+					<a href="#theses-carousel" role="button" data-slide="prev">
+						<i class="fi flaticon-arrow2 flaticon-arrow2-reverse" aria-hidden="true"></i>
+						<span class="sr-only">Previous</span>
+					</a>
 				</div>
-			</nav>
-		</div>
-		<div class="hidden-xs-down">
-			<div class="sticky-top">
-				<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
+				<div class="col col-auto">
+					<strong>These <span class="current-number">1</span></strong>/<span class="total-number"><f:count subject="{result.opinions}"/></span>
+				</div>
+				<div class="col col-auto">
+					<a href="#theses-carousel" role="button" data-slide="next">
+						<i class="fi flaticon-arrow2" aria-hidden="true"></i>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
 			</div>
-		</div>
-
-		<div class="content__main--wrapper">
-			<div class="content__main">
-				<main class="container pt-3">
+			<div class="desktop-thesis-control-wrap">
+				<div class="hidden-xs-down">
+					<a class="thesis-control-prev" href="#theses-carousel" role="button" data-slide="prev">
+						<i class="fi flaticon-arrow2 flaticon-arrow2-reverse" aria-hidden="true"></i>
+						<span class="sr-only">Previous</span>
+					</a>
+					<div class="theses-counter">
+						<strong>These <span class="current-number">1</span></strong>/<span class="total-number"><f:count subject="{result.opinions}"/></span>
+					</div>
+					<a class="thesis-control-next" href="#theses-carousel" role="button" data-slide="next">
+						<i class="fi flaticon-arrow2" aria-hidden="true"></i>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<div class="carousel-inner" role="listbox">
+					<f:for each="{result.opinions}" as="opinion" iteration="iterator">
+						<f:render partial="Thesis/Compare" arguments="{opinion: opinion, candidates: candidates, iterator: iterator}"/>
+					</f:for>
+				</div>
+			</div>
+			<f:for each="{result.opinions}" as="opinion" iteration="iterator">
+				<div id="theses-detail-{iterator.cycle}" class="thesis-detail-wrap{f:if(condition: '{iterator.isFirst}', then: ' active')}">
 					<div class="row">
-						<div class="col-12 mt-3">
-							<h1 class="hidden-xs-down">
-								Antworten vergleichen
-							</h1>
-
-							<p class="pb-3">
-								Vergleichen Sie Ihre Antworten mit denen der Parteien. Klicken Sie hierzu auf den jeweiligen Namen und lesen die Begründungen.
-							</p>
-							<p class="pb-3">
-								Sie möchten an unserer Nachbefragung zum Niedersachs-O-Mat teilnehmen? <f:link.external uri="https://ww2.unipark.de/uc/Nachbefragung_Niedersachs-O-Mat_2017/" target="_blank">Sagen Sie uns Ihre Meinung zur vorgezogenen Landtagswahl in Niedersachsen 2017.</f:link.external>
-							</p>
-							<div id="theses-carousel" class="carousel slide" data-interval="false">
-								<div class="row mb-3 hidden-md-up justify-content-between carousel-navigation">
-									<div class="col col-auto">
-										<a href="#theses-carousel" role="button" data-slide="prev">
-											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse" aria-hidden="true"></i>
-											<span class="sr-only">Previous</span>
-										</a>
-									</div>
-									<div class="col col-auto">
-										<strong>These <span class="current-number">1</span></strong>/<span class="total-number"><f:count subject="{result.opinions}"/></span>
-									</div>
-									<div class="col col-auto">
-										<a href="#theses-carousel" role="button" data-slide="next">
-											<i class="fi flaticon-arrow2" aria-hidden="true"></i>
-											<span class="sr-only">Next</span>
-										</a>
-									</div>
-								</div>
-								<div class="desktop-thesis-control-wrap">
-									<div class="hidden-xs-down">
-										<a class="thesis-control-prev" href="#theses-carousel" role="button" data-slide="prev">
-											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse" aria-hidden="true"></i>
-											<span class="sr-only">Previous</span>
-										</a>
-										<div class="theses-counter">
-											<strong>These <span class="current-number">1</span></strong>/<span class="total-number"><f:count subject="{result.opinions}"/></span>
-										</div>
-										<a class="thesis-control-next" href="#theses-carousel" role="button" data-slide="next">
-											<i class="fi flaticon-arrow2" aria-hidden="true"></i>
-											<span class="sr-only">Next</span>
-										</a>
-									</div>
-									<div class="carousel-inner" role="listbox">
-										<f:for each="{result.opinions}" as="opinion" iteration="iterator">
-											<f:render partial="Thesis/Compare" arguments="{opinion: opinion, candidates: candidates, iterator: iterator}"/>
-										</f:for>
-									</div>
-								</div>
-								<f:for each="{result.opinions}" as="opinion" iteration="iterator">
-									<div id="theses-detail-{iterator.cycle}" class="thesis-detail-wrap{f:if(condition: '{iterator.isFirst}', then: ' active')}">
-										<div class="row">
-											<div class="col-12">
+						<div class="col-12">
 												<span class="d-flex align-items-center">
 													<div class="w-100">
 														<f:switch expression="{opinion.opinion}">
@@ -110,43 +72,40 @@
 														</span>
 													</f:if>
 												</span>
-												<hr/>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-12">
-												<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
-													<f:for each="{candidates}" as="candidate" iteration="subiterator">
-														<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: subiterator}"/>
-													</f:for>
-												</div>
-											</div>
-										</div>
-									</div>
+							<hr/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
+								<f:for each="{candidates}" as="candidate" iteration="subiterator">
+									<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: subiterator}"/>
 								</f:for>
 							</div>
 						</div>
 					</div>
-					<div class="row mt-3 align-items-center hidden-xs-down">
-						<div class="col-6">
-							<f:link.action action="result" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}" class="text-gray-dark">
-								<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-								zurück zu den Ergebnissen
-							</f:link.action>
-						</div>
-						<div class="col-6 text-right">
-							<f:link.page pageUid="{settings.homePid}" class="text-gray-dark">
-								Niedersachs-O-Mat neu starten
-								<i class="fi flaticon-arrow2 flaticon-arrow2"></i>
-							</f:link.page>
-						</div>
-					</div>
-					<div class="row mt-3 justify-content-center">
-						<div class="col col-auto">
-							<f:render partial="Sharing/General" arguments="{text: 'Kandidat-O-Mat / Niedersachs-O-Mat teilen', settings: settings}"/>
-						</div>
-					</div>
-				</main>
+				</div>
+			</f:for>
+		</div>
+		</div>
+		</div>
+		<div class="row mt-3 align-items-center hidden-xs-down">
+			<div class="col-6">
+				<f:link.action pageUid="{settings.resultPid}" action="result" controller="Election" additionalParams="{tx_kom_pi1: '{election: result.election, electionDistrict: result.electionDistrict}'}" class="text-gray-dark">
+					<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+					zurück zu den Ergebnissen
+				</f:link.action>
+			</div>
+			<div class="col-6 text-right">
+				<f:link.page pageUid="{settings.homePid}" class="text-gray-dark">
+					Niedersachs-O-Mat neu starten
+					<i class="fi flaticon-arrow2 flaticon-arrow2"></i>
+				</f:link.page>
+			</div>
+		</div>
+		<div class="row mt-3 justify-content-center">
+			<div class="col col-auto">
+				<f:render partial="Sharing/General" arguments="{text: 'Kandidat-O-Mat teilen', settings: settings}"/>
 			</div>
 		</div>
 	</f:section>
