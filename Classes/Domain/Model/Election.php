@@ -40,6 +40,11 @@ class Election extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $theses = null;
 
     /**
+     * @var string
+     */
+    protected $logos = '';
+
+    /**
      * __construct
      */
     public function __construct()
@@ -145,4 +150,19 @@ class Election extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->theses = $theses;
     }
+
+    /**
+     * @return string
+     */
+    public function getLogos() {
+        return $this->logos;
+    }
+
+    /**
+     * @param string $logos
+     */
+    public function setLogos($logos) {
+        $this->logos = $logos;
+    }
+
 }

@@ -125,7 +125,11 @@
 	</div>
 	<div class="hidden-xs-down">
 		<div class="sticky-top">
-			<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
+			<nav class="navbar">
+				<div class="container">
+					<f:format.html>{result.election.logos}</f:format.html>
+				</div>
+			</nav>
 		</div>
 	</div>
 </f:section>

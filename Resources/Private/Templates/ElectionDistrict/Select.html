@@ -16,7 +16,7 @@
 			<h1>
 				<f:translate key="LLL:EXT:theme_kom/Resources/Private/Language/locallang.xlf:header.logo.sitename"/>
 			</h1>
-			<small>Vergleichen Sie Ihre Meinung mit den Positionen der Parteien</small>
+			<small>Vergleichen Sie Ihre Meinung mit den Positionen der Kandidaten</small>
 		</div>
 	</div>
 	<f:form pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" class="mt-4">
@@ -26,7 +26,7 @@
 					<f:then>
 						<f:if condition="{electionDistricts -> f:count()} == 1">
 							<f:then>
-								<f:link.action class="btn btn-lg btn-secondary" pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistricts.0, election: electionDistricts.0.elections.0}">Jetzt starten</f:link.action>
+								<f:link.action class="btn btn-lg btn-secondary" pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistricts.0, election: electionDistricts.0.elections.0}">Jetzt Kandidat-O-Mat für {electionDistricts.0.title} starten</f:link.action>
 							</f:then>
 							<f:else>
 								<div class="select-wrap">
