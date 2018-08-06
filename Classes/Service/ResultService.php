@@ -30,12 +30,16 @@ class ResultService extends \TYPO3\CMS\Extbase\Persistence\Repository {
         $resultOpinionsCount = count($resultOpinions);
         $i = 0;
 
-        $canidates = $this->candidateRepository->findByElectionDistrictAndElection($result->getElectionDistrict(), $result->getElection());
+        $canidates = [];
+        $canidatesRelations = $result->getCandidates();
+        foreach ($canidatesRelations as $canidatesRelation) {
+            $canidates[] = $canidatesRelation->getUidLocal();
+        }
 
         $calculatedResults = [];
 
         foreach ($resultOpinions as $resultOpinion) {
-            if ($canidates->count() > 0) {
+            if (count($canidates) > 0) {
                 foreach ($canidates as $canidate) {
                     $thesisMatch = FALSE;
                     $candidateOpinions = $canidate->getOpinions();

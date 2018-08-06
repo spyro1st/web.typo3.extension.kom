@@ -3,19 +3,19 @@
 	<div class="row">
 		<div class="col-12">
 			<div role="tab" id="heading-{iterator.cycle}">
-				<v:variable.set name="candidateOpinion" value="{v:iterator.filter(subject: '{candidate.opinions}', filter: '{opinion.uidLocal}', propertyName: 'uidLocal')}"/>
+				<v:variable.set name="candidateOpinion" value="{v:iterator.filter(subject: '{candidate.uidLocal.opinions}', filter: '{opinion.uidLocal}', propertyName: 'uidLocal')}"/>
 				<v:variable.set name="candidateOpinion" value="{candidateOpinion.0}"/>
 				<span class="d-flex align-items-center">
 					<div class="w-100">
 						<f:if condition="{candidateOpinion.explanation}">
 							<f:then>
 								<h5 class="collapse-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-{opinion.uid}-{iterator.cycle}" aria-expanded="true" aria-controls="collapse-{opinion.uid}-{iterator.cycle}">
-									<span>{candidate.fullName}</span>
+									<span>{candidate.uidLocal.fullName}</span>
 								</h5>
 							</f:then>
 							<f:else>
 								<h5>
-									<span>{candidate.fullName}</span>
+									<span>{candidate.uidLocal.fullName}</span>
 								</h5>
 							</f:else>
 						</f:if>

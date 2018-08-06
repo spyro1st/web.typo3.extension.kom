@@ -102,6 +102,9 @@
 			<trans-unit id="tx_kom_domain_model_result.opinions">
 				<source>Opinions</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_result.candidates">
+				<source>Candidates</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_result.step">
 				<source>Step</source>
 			</trans-unit>
@@ -122,6 +125,9 @@
 			</trans-unit>
 			<trans-unit id="tx_kom_result_thesis_mm.emphasize.enable">
 				<source>Emphasize</source>
+			</trans-unit>
+			<trans-unit id="tx_kom_result_candidate_mm">
+				<source>Result Candidate Mapping</source>
 			</trans-unit>
 		</body>
 	</file>

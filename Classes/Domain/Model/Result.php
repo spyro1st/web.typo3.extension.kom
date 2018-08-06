@@ -25,6 +25,14 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $opinions = null;
 
     /**
+     * candidates
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ResultCandidate>
+     * @cascade remove
+     */
+    protected $candidates = null;
+
+    /**
      * electionDistrict
      *
      * @var \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict
@@ -80,6 +88,7 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->opinions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->candidates = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -99,7 +108,7 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinionToRemove The Opinion to be removed
      * @return void
      */
-    public function removeOpinion(\DigitalPatrioten\Kom\Domain\Model\Election $opinionToRemove)
+    public function removeOpinion(\DigitalPatrioten\Kom\Domain\Model\ResultOpinion $opinionToRemove)
     {
         $this->opinions->detach($opinionToRemove);
     }
@@ -123,6 +132,49 @@ class Result extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOpinions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $opinions)
     {
         $this->opinions = $opinions;
+    }
+
+    /**
+     * Adds a Candidate
+     *
+     * @param \DigitalPatrioten\Kom\Domain\Model\ResultCandidate $candidate
+     * @return void
+     */
+    public function addCandidate(\DigitalPatrioten\Kom\Domain\Model\ResultCandidate $candidate)
+    {
+        $this->candidates->attach($candidate);
+    }
+
+    /**
+     * Removes a Candidate
+     *
+     * @param \DigitalPatrioten\Kom\Domain\Model\ResultCandidate $candidateToRemove The Candidate to be removed
+     * @return void
+     */
+    public function removeCandidate(\DigitalPatrioten\Kom\Domain\Model\ResultCandidate $candidateToRemove)
+    {
+        $this->candidates->detach($candidateToRemove);
+    }
+
+    /**
+     * Returns the Candidates
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ResultCandidate> $candidates
+     */
+    public function getCandidates()
+    {
+        return $this->candidates;
+    }
+
+    /**
+     * Sets the Candidates
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DigitalPatrioten\Kom\Domain\Model\ResultCandidate> $candidates
+     * @return void
+     */
+    public function setCandidates(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $candidates)
+    {
+        $this->candidates = $candidates;
     }
 
     /**

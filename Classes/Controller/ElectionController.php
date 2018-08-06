@@ -152,6 +152,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             }
         }
 
+        if (isset($requestArguments['resultObject']['candidates']) && empty($requestArguments['resultObject']['candidates'])) {
+            $this->formData['resultObject']['candidates'] = '__UNSET';
+        }
+
         $this->storeSessionData();
     }
 
@@ -186,6 +190,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      */
     protected function storeSessionData() {
         $oldSessionData = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->sessionDataStorageKey);
+        unset($oldSessionData['formData']['resultObject']['candidates']);
         if ($oldSessionData['formData'] && $this->formData) {
             ArrayUtility::mergeRecursiveWithOverrule($oldSessionData['formData'], $this->formData);
             $this->sessionData['formData'] = $oldSessionData['formData'];
@@ -231,6 +236,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param int $step
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function questionnaireAction(
         \DigitalPatrioten\Kom\Domain\Model\ElectionDistrict $electionDistrict,
@@ -300,6 +309,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function emphasizeAction() {
         $result = $this->createResultObjectFromSession();
@@ -315,6 +328,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param \DigitalPatrioten\Kom\Domain\Model\Result $resultObject
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function selectionAction(\DigitalPatrioten\Kom\Domain\Model\Result $resultObject = NULL) {
         $result = $this->createResultObjectFromSession();
@@ -332,6 +349,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param \DigitalPatrioten\Kom\Domain\Model\Result $resultObject
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function resultAction(\DigitalPatrioten\Kom\Domain\Model\Result $resultObject = NULL) {
         $result = $this->createResultObjectFromSession();
@@ -343,6 +364,7 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $this->view->assignMultiple(
             [
                 'result' => $result,
+                'resultObject' => $resultObject,
                 'calculatedResults' => $calculatedResults
             ]
         );
@@ -350,6 +372,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function compareAction() {
         $result = $this->createResultObjectFromSession();
@@ -368,6 +394,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function navigationAction() {
         $arguments = $this->request->getArguments();
@@ -378,7 +408,6 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $totalSteps = $thesesMappings->getTheses()->count();
 
         if ($step === 0) {
-//            $this->clearSessionData();
             $initialSessionData = [
                 'electionDistrict' => $electionDistrict->getUid(),
                 'election' => $election->getUid(),
@@ -394,7 +423,6 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 ];
                 $i++;
             }
-//            $this->storeInitalSessionData($initialSessionData);
             /* @var \DigitalPatrioten\Kom\Domain\Model\Result $result */
             $result = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\Result');
             $result->setElection($election);
@@ -418,6 +446,10 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * persists the result object from session
      * @return \DigitalPatrioten\Kom\Domain\Model\Result
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     private function createResultObjectFromSession() {
         $resultData = $this->sessionData['formData'];
@@ -455,6 +487,24 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $resultObject->setStep($resultData['step']);
         $resultObject->setTotalSteps($resultData['totalSteps']);
+
+        $resultObject->setCandidates($this->objectManager->get('TYPO3\CMS\Extbase\Persistence\ObjectStorage'));
+        $this->persistsResultObject($resultObject);
+        if ($resultData['resultObject']['candidates']) {
+            $resultsObjectStorage = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+            foreach ($resultData['resultObject']['candidates'] as $candidate) {
+                /* @var \DigitalPatrioten\Kom\Domain\Model\ResultCandidate $canidateObject */
+                $canidateObject = $this->objectManager->get('DigitalPatrioten\\Kom\\Domain\\Model\\ResultCandidate');
+                $canidateObject->setUidLocal($this->candidateRepository->findByUid($candidate));
+                $canidateObject->setUidForeign($resultObject);
+                
+
+                $resultsObjectStorage->attach($canidateObject);
+            }
+            $resultObject->setCandidates($resultsObjectStorage);
+        }
+
+        $this->persistsResultObject($resultObject);
         
         $i = 0;
         foreach ($resultObject->getOpinions() as $opinion) {
@@ -473,6 +523,8 @@ class ElectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
     protected function redirectToStart() {
         $pageUid = $this->settings['homePid'] || 1;

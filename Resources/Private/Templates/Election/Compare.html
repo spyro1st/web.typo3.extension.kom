@@ -39,7 +39,7 @@
 				</div>
 				<div class="carousel-inner" role="listbox">
 					<f:for each="{result.opinions}" as="opinion" iteration="iterator">
-						<f:render partial="Thesis/Compare" arguments="{opinion: opinion, candidates: candidates, iterator: iterator}"/>
+						<f:render partial="Thesis/Compare" arguments="{opinion: opinion, candidates: result.candidates, iterator: iterator}"/>
 					</f:for>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div id="accordion" class="candidate-thesis-list" role="tablist" aria-multiselectable="true">
-								<f:for each="{candidates}" as="candidate" iteration="subiterator">
+								<f:for each="{result.candidates}" as="candidate" iteration="subiterator">
 									<f:render partial="Candidate/Compare" arguments="{opinion: opinion, candidate: candidate, iterator: subiterator}"/>
 								</f:for>
 							</div>
@@ -98,7 +98,7 @@
 			</div>
 			<div class="col-6 text-right">
 				<f:link.page pageUid="{settings.homePid}" class="text-gray-dark">
-					Niedersachs-O-Mat neu starten
+					Kandidat-O-Mat neu starten
 					<i class="fi flaticon-arrow2 flaticon-arrow2"></i>
 				</f:link.page>
 			</div>

@@ -15,10 +15,10 @@ return [
         'hideTable' => 1,
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, step, total_steps, session_id',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, candidates, step, total_steps, session_id',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, step, total_steps, session_id'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, election_distric, election, opinions, candidates, step, total_steps, session_id'],
     ],
     'columns' => [
         'hidden' => [
@@ -61,6 +61,25 @@ return [
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_kom_result_thesis_mm',
+                'foreign_field' => 'uid_foreign',
+                'foreign_label' => 'uid_local',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1
+                ]
+            ],
+        ],
+        'candidates' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_result.candidates',
+            'config' => [
+                'type' => 'select',
+                'foreign_table' => 'tx_kom_result_candidate_mm',
                 'foreign_field' => 'uid_foreign',
                 'foreign_label' => 'uid_local',
                 'maxitems' => 9999,

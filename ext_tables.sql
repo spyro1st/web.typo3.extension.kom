@@ -180,6 +180,7 @@ CREATE TABLE tx_kom_domain_model_result (
 	election int(11) unsigned DEFAULT '0' NOT NULL,
 	election_district int(11) unsigned DEFAULT '0' NOT NULL,
 	opinions int(11) unsigned DEFAULT '0' NOT NULL,
+	candidates int(11) unsigned DEFAULT '0' NOT NULL,
 	step int(11) DEFAULT '0' NOT NULL,
 	total_steps int(11) DEFAULT '0' NOT NULL,
 	session_id varchar(255) DEFAULT '' NOT NULL,
@@ -297,6 +298,24 @@ CREATE TABLE tx_kom_result_thesis_mm (
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	opinion tinytext NOT NULL,
 	emphasize tinyint(4) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_kom_result_canidate_mm'
+#
+CREATE TABLE tx_kom_result_candidate_mm (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
