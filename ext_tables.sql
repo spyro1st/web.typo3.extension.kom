@@ -62,6 +62,7 @@ CREATE TABLE tx_kom_domain_model_election (
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	starttime int(11) unsigned DEFAULT '0' NOT NULL,
 	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 
 	t3ver_oid int(11) DEFAULT '0' NOT NULL,
 	t3ver_id int(11) DEFAULT '0' NOT NULL,
@@ -195,15 +196,6 @@ CREATE TABLE tx_kom_domain_model_result (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
-
-);
-
-#
-# Table structure for table 'tx_kom_domain_model_election'
-#
-CREATE TABLE tx_kom_domain_model_election (
-
-	electiondistrict int(11) unsigned DEFAULT '0' NOT NULL,
 
 );
 

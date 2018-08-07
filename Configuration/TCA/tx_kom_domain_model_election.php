@@ -17,7 +17,8 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,date,electiondistricts',
-        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif'
+        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif',
+        'sortby' => 'sorting'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, description, logos',
