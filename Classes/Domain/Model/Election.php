@@ -42,6 +42,11 @@ class Election extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var string
      */
+    protected $description = '';
+
+    /**
+     * @var string
+     */
     protected $logos = '';
 
     /**
@@ -149,6 +154,20 @@ class Election extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTheses(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $theses)
     {
         $this->theses = $theses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description) {
+        $this->description = $description;
     }
 
     /**
