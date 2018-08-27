@@ -7,7 +7,7 @@
 		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}"/>
 
 		<f:form id="emphasize-form" pageUid="{settings.selectionPid}" action="selection" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{resultObject}" objectName="resultObject">
-			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+			<div id="accordion" class="thesis-list mb-4 mb-sm-0" role="tablist" aria-multiselectable="true">
 				<f:for each="{result.opinions}" as="opinion" iteration="iterator">
 					<div class="row">
 						<div class="col-12">

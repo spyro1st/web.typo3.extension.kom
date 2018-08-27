@@ -8,7 +8,7 @@
 		<v:variable.set name="totalSteps" value="{f:count(subject: '{result.opinions}')}"/>
 
 		<f:form id="selection-form" pageUid="{settings.resultPid}" action="result" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}" object="{result}" objectName="resultObject">
-			<div id="accordion" class="thesis-list" role="tablist" aria-multiselectable="true">
+			<div id="accordion" class="thesis-list mb-4 mb-sm-0" role="tablist" aria-multiselectable="true">
 				<f:for each="{candidates}" as="candidate" iteration="iterator">
 					<div class="row">
 						<div class="col-4 col-md-2">
@@ -32,7 +32,7 @@
 						<div class="col-3 col-md-2 d-flex align-items-center">
 							<span class="d-flex align-items-center w-100 justify-content-center">
 								<span class="emphasize-toggle mr-1">
-									<kom:form.checkbox id="selection-{iterator.cycle}" class="checkbox-star" value="{candidate.uid}" property="candidates" multiple="1" />
+									<kom:form.checkbox id="selection-{iterator.cycle}" class="checkbox-check" value="{candidate.uid}" property="candidates" multiple="1" />
 									<label for="selection-{iterator.cycle}"></label>
 								</span>
 							</span>

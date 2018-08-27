@@ -106,49 +106,49 @@
 			</div>
 		</div>
 	</div>
-	<div class="row my-3 hidden-md-down">
+	<div class="row my-3">
 		<div class="col-12">
 			<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 				<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{currentThesis.uid}"/>
 				<f:form.checkbox id="emphasize-{step}" class="invisible" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]"/>
 				<div class="row">
-					<div class="col-12 col-sm-3 d-flex">
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
 						<f:form.button id="btn-agree" class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
-										<span class="d-flex align-items-center">
+										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
 												<i class="fi flaticon-check"></i>
 											</span>
-											ich stimme zu
+											<span class="hidden-lg-down">ich stimme zu</span>
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-12 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
 						<f:form.button id="btn-disagree" class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
-										<span class="d-flex align-items-center">
+										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
 												<i class="fi flaticon-cancel"></i>
 											</span>
-											ich stimme nicht zu
+											<span class="hidden-lg-down">ich stimme nicht zu</span>
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-12 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
 						<f:form.button id="btn-draw" class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
-										<span class="d-flex align-items-center">
+										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
 												<i class="fi flaticon-minus"></i>
 											</span>
-											neutral
+											<span class="hidden-lg-down">neutral</span>
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-12 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
 						<f:form.button id="btn-skip" class="btn btn-lg btn-block btn-secondary" name="resultObject[opinions][{step}][opinion]" value="0">
-										<span class="d-flex align-items-center">
+										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
 												<i class="fi flaticon-arrow2"></i>
 											</span>
-											überspringen
+											<span class="hidden-lg-down">überspringen</span>
 										</span>
 						</f:form.button>
 					</div>

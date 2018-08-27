@@ -6,7 +6,7 @@
 		<f:flashMessages/>
 
 		<div class="result-list">
-			<f:form action="compare" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
+			<f:form pageUid="{settings.comparePid}" action="compare" additionalParams="{tx_kom_pi1: '{electionDistrict: result.electionDistrict, election: result.election}'}">
 				<f:for each="{calculatedResults}" as="calculatedResult">
 					<div class="row">
 						<div class="col-4 col-md-2">
