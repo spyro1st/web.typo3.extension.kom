@@ -22,6 +22,9 @@
 				</div>
 			</f:then>
 			<f:else>
+				<f:if condition="{step} == 1">
+					<f:render partial="Thesis/HelpMobile"></f:render>
+				</f:if>
 				<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step, totalSteps: totalSteps}"/>
 			</f:else>
 		</f:if>
