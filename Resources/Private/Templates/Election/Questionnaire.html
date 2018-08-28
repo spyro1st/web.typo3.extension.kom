@@ -13,7 +13,9 @@
 
 		<f:if condition="{step} == 0">
 			<f:then>
-				<f:format.html>{election.description}</f:format.html>
+				<div class="my-sm-5">
+					<f:format.html>{election.description}</f:format.html>
+				</div>
 				<div class="text-md-center">
 					<f:link.action pageUid="{settings.questionnairePid}" action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary btn-block-xs">
 						Jetzt starten
