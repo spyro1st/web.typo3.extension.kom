@@ -2,31 +2,14 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-	<div class="row">
-		<div class="col-12 text-center text-uppercase">
-			<div class="row justify-content-center">
-				<div class="col-6 col-md-2">
-					<f:image
-						class="img-fluid w-100"
-						src="EXT:theme_kom/Resources/Public/Images/Frontend/logo-kom.svg"
-						alt="{f:translate(key:'LLL:EXT:theme_kom/Resources/Private/Language/locallang.xlf:header.logo.alttext')}"
-					/>
-				</div>
-			</div>
-			<h1>
-				<f:translate key="LLL:EXT:theme_kom/Resources/Private/Language/locallang.xlf:header.logo.sitename"/>
-			</h1>
-			<small>Vergleichen Sie Ihre Meinung mit den Positionen der Parteien</small>
-		</div>
-	</div>
-	<f:form pageUid="{settings.questionnairePid}" action="questionnaire" controller="Election" class="mt-4">
+	<f:form pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" class="mt-4">
 		<div class="form-group row justify-content-center">
 			<div class="col-12 col-lg-6 text-center">
 				<f:if condition="{electionDistricts -> f:count()} > 0">
 					<f:then>
 						<f:if condition="{electionDistricts -> f:count()} == 1">
 							<f:then>
-								<f:link.action class="btn btn-lg btn-secondary" pageUid="{settings.questionnairePid}" action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistricts.0, election: electionDistricts.0.elections.0}">Jetzt starten</f:link.action>
+								<f:link.action class="btn btn-lg btn-secondary" pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" arguments="{electionDistrict: electionDistricts.0, election: electionDistricts.0.elections.0}">Jetzt Kandidat-O-Mat für {electionDistricts.0.title} starten</f:link.action>
 							</f:then>
 							<f:else>
 								<div class="select-wrap">

@@ -19,7 +19,7 @@
 									</numIndex>
 									<numIndex index="1">
 										<numIndex index="0">Questionnaire</numIndex>
-										<numIndex index="1">Election->questionnaire;Election->emphasize;Election->result;Election->compare</numIndex>
+										<numIndex index="1">Election->questionnaire;Election->emphasize;Election->selection;Election->result;Election->compare</numIndex>
 									</numIndex>
 									<numIndex index="2">
 										<numIndex index="0">Result Count</numIndex>

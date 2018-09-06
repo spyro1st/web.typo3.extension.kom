@@ -17,13 +17,14 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,date,electiondistricts',
-        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif'
+        'iconfile' => 'EXT:kom/Resources/Public/Icons/tx_kom_domain_model_election.gif',
+        'sortby' => 'sorting'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, description, logos',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, electiondistricts, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, date, description, logos, electiondistricts, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -138,35 +139,56 @@ return [
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
-                'multiple' => 0,
+                'multiple' => 1,
+            ],
+        ],
+        'description' => [
+            'l10n_mode' => 'prefixLangTitle',
+            'l10n_cat' => 'text',
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.description',
+            'config' => [
+                'type' => 'text',
+                'cols' => '80',
+                'rows' => '15',
                 'wizards' => [
-                    '_PADDING' => 1,
-                    '_VERTICAL' => 1,
-                    'edit' => [
-                        'module' => [
-                            'name' => 'wizard_edit',
-                        ],
-                        'type' => 'popup',
-                        'title' => 'Edit', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.edit
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-                    ],
-                    'add' => [
-                        'module' => [
-                            'name' => 'wizard_add',
-                        ],
+                    'RTE' => [
+                        'notNewRecords' => 1,
+                        'RTEonly' => 1,
                         'type' => 'script',
-                        'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-                        'params' => [
-                            'table' => 'tx_kom_domain_model_electiondistrict',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon' => 'actions-wizard-rte',
+                        'module' => [
+                            'name' => 'wizard_rte'
+                        ]
                     ],
+                    'table' => [
+                        'notNewRecords' => 1,
+                        'enableByTypeConfig' => 1,
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.table',
+                        'icon' => 'content-table',
+                        'module' => [
+                            'name' => 'wizard_table'
+                        ],
+                        'params' => [
+                            'xmlOutput' => 0
+                        ]
+                    ]
                 ],
             ],
+            'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]'
+        ],
+        'logos' => [
+            'l10n_mode' => 'prefixLangTitle',
+            'l10n_cat' => 'text',
+            'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.ALT.html_formlabel',
+            'config' => [
+                'type' => 'text',
+                'renderType' => 't3editor',
+                'format' => 'html',
+                'cols' => '80',
+                'rows' => '15'
+            ]
         ],
     ],
 ];

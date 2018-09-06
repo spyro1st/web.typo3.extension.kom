@@ -32,18 +32,28 @@ plugin.tx_kom {
           tableName = tx_kom_candidate_thesis_mm
         }
       }
+      DigitalPatrioten\Kom\Domain\Model\ResultCandidate {
+        mapping {
+          tableName = tx_kom_result_candidate_mm
+        }
+      }
     }
   }
   features {
     skipDefaultArguments = 1
   }
   mvc {
-    #callDefaultActionIfActionCantBeResolved = 1
+    callDefaultActionIfActionCantBeResolved = 1
   }
   
   settings {
     homePid = {$plugin.tx_kom.settings.homePid}
+    questionnaireStartPid = {$plugin.tx_kom.settings.questionnaireStartPid}
     questionnairePid = {$plugin.tx_kom.settings.questionnairePid}
+    emphasizePid = {$plugin.tx_kom.settings.emphasizePid}
+    resultPid = {$plugin.tx_kom.settings.resultPid}
+    comparePid = {$plugin.tx_kom.settings.comparePid}
+    selectionPid = {$plugin.tx_kom.settings.selectionPid}
   }
 }
 
@@ -93,4 +103,19 @@ module.tx_kom_web_komoverview {
     layoutRootPaths.0 = EXT:kom/Resources/Private/Backend/Layouts/
     layoutRootPaths.1 = {$module.tx_kom_overview.view.layoutRootPath}
   }
+}
+
+lib.kom.navigation = USER
+lib.kom.navigation {
+  userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+  extensionName = Kom
+  pluginName = Pi1
+  vendorName = DigitalPatrioten
+  controller = Election
+  action = navigation
+  switchableControllerActions.Election.1 = navigation
+#  switchableControllerActions.Election.2 = emphasize
+  view < plugin.tx_kom.view
+  persistence < plugin.tx_kom.persistence
+  settings < plugin.tx_kom.settings
 }

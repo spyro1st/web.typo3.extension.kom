@@ -1,95 +1,35 @@
 {namespace v=FluidTYPO3\Vhs\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:layout name="Default"/>
+	<f:layout name="Default"/>
 
-<f:section name="main">
+	<f:section name="main">
 
-	<f:flashMessages/>
-	<v:variable.set name="nextStep" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
-	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
-	<v:variable.set name="thesis" value="{v:variable.get(name: 'thesesMappings.theses.{previousStep}')}" />
-	<v:variable.set name="opinion" value="{v:variable.get(name: 'result.opinions.{previousStep}')}" />
+		<f:flashMessages/>
+		<v:variable.set name="nextStep" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}"/>
+		<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}"/>
+		<v:variable.set name="thesis" value="{v:variable.get(name: 'thesesMappings.theses.{previousStep}')}"/>
+		<v:variable.set name="opinion" value="{v:variable.get(name: 'result.opinions.{previousStep}')}"/>
 
-	<div class="sticky-top hidden-md-up">
-		<nav class="navbar navbar-inverse bg-primary">
-			<div class="container">
-				<div class="row justify-content-between">
-					<f:if condition="{step} == 0">
-						<f:then>
-							<div class="col col-auto align-self-center">
-								<f:link.page pageUid="1">
-									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-								</f:link.page>
-							</div>
-							<div class="col col-auto navbar-brand">
-								Kandidat-O-Mat / Niedersachs-O-Mat
-							</div>
-							<div class="col col-auto align-self-center"></div>
-						</f:then>
-						<f:else>
-							<div class="col col-auto align-self-center">
-								<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
-									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-								</f:link.action>
-							</div>
-							<div class="col col-auto navbar-brand">
-								These <strong>{step}</strong> von {totalSteps}
-							</div>
-						</f:else>
-					</f:if>
-					<f:if condition="{step} > 0">
-						<div class="col col-auto align-self-center">
-							<f:if condition="{opinion.opinion}">
-								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-									<f:form.button class="unstyled" name="resultObject[opinions][{step}][opinion]" value="{opinion.opinion}">
-										<i class="fi flaticon-arrow2"></i>
-									</f:form.button>
-								</f:form>
-							</f:if>
-						</div>
-					</f:if>
+
+		<f:if condition="{step} == 0">
+			<f:then>
+				<div class="my-sm-5">
+					<f:format.html>{election.description}</f:format.html>
 				</div>
-			</div>
-		</nav>
-	</div>
-	<div class="hidden-xs-down">
-		<div class="sticky-top">
-			<f:render partial="Area/Nav/Start" section="Default" arguments="{_all}"/>
-		</div>
-	</div>
-	<div class="content__main--wrapper">
-		<div class="content__main">
-			<main class="container pt-3">
-				<div class="row">
-					<div class="col-12 mt-3">
-						<f:if condition="{step} == 0">
-							<f:then>
-								<div class="text-md-center">
-									<h1>Willkommen beim Kandidat-O-Mat / Niedersachs-O-Mat</h1>
-									<p class="pb-3">
-										Der Kandidat-O-Mat ist eine Online-Wahlhilfe der Landeszentrale für politische Bildung Baden-Württemberg. Das Online-Tool wird dem Projekt Niedersachs-O-Mat der Universität Freiburg (Prof. Wagschal), der Technischen Universität Braunschweig (Prof. Bandelow) und der Universität Düsseldorf (Prof. Marschall) zur Verfügung gestellt.
-										<br/><br/>
-										Die Online-Wahlhilfe gibt Ihnen die Möglichkeit, Ihre politischen Positionen mit denen der zur Landtagswahl in Niedersachsen antretenden Parteien zu vergleichen.
-										<br/><br/>
-										Von den insgesamt 15 Parteien, die zur Landtagswahl in Niedersachsen antreten, haben 13 Parteien auf die 38 Thesen der Wissenschaftler geantwortet.
-										<br/><br/>
-										Nehmen Sie Stellung zu wichtigen Themen der Landtagswahl und vergleichen Sie Ihre Positionen mit den Antworten der Parteien.
-									</p>
-									<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary btn-block-xs">
-										Jetzt starten
-										<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3 float-right"></i>
-									</f:link.action>
-								</div>
-							</f:then>
-							<f:else>
-								<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step, totalSteps: totalSteps}"/>
-							</f:else>
-						</f:if>
-					</div>
+				<div class="text-md-center">
+					<f:link.action pageUid="{settings.questionnairePid}" action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: 1}" class="btn btn-lg btn-primary btn-block-xs">
+						Jetzt starten
+						<i class="fi flaticon-arrow flaticon-arrow-reverse ml-3 float-right"></i>
+					</f:link.action>
 				</div>
-			</main>
-		</div>
-	</div>
-</f:section>
+			</f:then>
+			<f:else>
+				<f:if condition="{step} == 1">
+					<f:render partial="Thesis/HelpMobile"></f:render>
+				</f:if>
+				<f:render partial="Thesis/Properties" arguments="{electionDistrict: electionDistrict, election: election, theses: thesesMappings.theses, result: result, step: step, totalSteps: totalSteps}"/>
+			</f:else>
+		</f:if>
+
+	</f:section>
 </html>

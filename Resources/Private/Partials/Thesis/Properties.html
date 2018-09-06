@@ -1,135 +1,159 @@
 {namespace v=FluidTYPO3\Vhs\ViewHelpers}
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-	<v:variable.set name="nextStep" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}" />
-	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}" />
-	<v:variable.set name="opinion" value="{v:variable.get(name: 'result.opinions.{previousStep}')}" />
+	<v:variable.set name="nextStep" value="{v:math.sum(a: '{step}', fail: 1, b: '1')}"/>
+	<v:variable.set name="previousStep" value="{v:math.subtract(a: '{step}', fail: 1, b: '1')}"/>
+	<v:variable.set name="opinion" value="{v:variable.get(name: 'result.opinions.{previousStep}')}"/>
+	<v:variable.set name="nextStepCount" value="0"/>
 
-	<f:for each="{theses}" as="thesis" iteration="iterator">
-		<f:if condition="{iterator.cycle} == {step}">
-			<div class="row mb-3">
-				<div class="col-12">
-					<div class="thesis-balloon-wrap">
-						<div class="hidden-xs-down">
-							<f:if condition="{step} == 0">
-								<f:then>
-									<div class="thesis-control-prev">
-										<f:link.page pageUid="1">
+	<div class="row mb-3">
+		<div class="col-12">
+			<div class="thesis-balloon-wrap">
+				<f:comment>
+					<f:if condition="{step} == 0">
+						<f:then>
+							<div class="thesis-control-prev">
+								<f:link.page pageUid="1">
+									<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
+								</f:link.page>
+							</div>
+						</f:then>
+						<f:else>
+							<div class="thesis-control-prev">
+								<f:if condition="{step} == 1">
+									<f:then>
+										<f:link.action pageUid="{settings.questionnaireStartPid}" action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
 											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
-										</f:link.page>
-									</div></f:then>
-								<f:else>
-									<div class="thesis-control-prev">
+										</f:link.action>
+									</f:then>
+									<f:else>
 										<f:link.action action="questionnaire" controller="Election" arguments="{election: election, electionDistrict: electionDistrict, step: '{v:math.subtract(a: \'{step}\', fail: 1, b: \'1\')}'}">
 											<i class="fi flaticon-arrow2 flaticon-arrow2-reverse"></i>
 										</f:link.action>
+									</f:else>
+								</f:if>
+							</div>
+						</f:else>
+					</f:if>
+				</f:comment>
+				<f:if condition="{opinion.uidLocal}">
+					<f:render partial="Sharing/Header" arguments="{electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
+					<f:comment>
+						<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+							<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}"/>
+							<f:form.button class="unstyled" name="resultObject[opinions][{step}][opinion]" value="{opinion.opinion}">
+								<i class="fi flaticon-arrow2"></i>
+							</f:form.button>
+						</f:form>
+					</f:comment>
+				</f:if>
+				<div class="row justify-content-center mt-3 mb-4 mb-sm-5">
+					<div class="col col-auto mr-auto">
+						<div class="thesis-counter text-left">
+							These <strong>{step}</strong> von {totalSteps}
+						</div>
+					</div>
+					<div class="col col-auto ml-auto mr-md-0">
+						<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
+					</div>
+				</div>
+
+				<div class="thesis-balloon-wrap-inner">
+					<f:for each="{theses}" as="thesis" iteration="iterator">
+					<v:variable.set name="currentThesis" value="{thesis}"/>
+					<f:if condition="{iterator.cycle} == {step}">
+						<f:then>
+							<div class="thesis-balloon" data-agree="Stimme zu" data-disagree="Stimme nicht zu" data-draw="Neutral" data-skip="Überspringen">
+								<div class="content">
+									<h2>{thesis.title}</h2>
+									<f:format.raw>{thesis.description}</f:format.raw>
+								</div>
+							</div>
+						</f:then>
+						<f:else>
+							<f:if condition="{iterator.cycle} > {step}">
+								<f:if condition="{nextStepCount} < 3">
+									<v:variable.set name="nextStepCount" value="{v:math.sum(a: '{nextStepCount}', fail: 1, b: '1')}" />
+									<div class="thesis-balloon-inactive">
+										<div class="content">
+											<h2>{thesis.title}</h2>
+											<f:format.raw>{thesis.description}</f:format.raw>
+										</div>
 									</div>
-								</f:else>
+								</f:if>
 							</f:if>
-							<f:if condition="{opinion.uidLocal}">
-								<f:render partial="Sharing/Header" arguments="{electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
-								<f:form class="thesis-control-next" additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-									<f:form.button class="unstyled" name="resultObject[opinions][{step}][opinion]" value="{opinion.opinion}">
-										<i class="fi flaticon-arrow2"></i>
-									</f:form.button>
-								</f:form>
-							</f:if>
-							<div class="text-right">
-								These <strong>{step}</strong> von {totalSteps}
-							</div>
-						</div>
-						<div class="thesis-balloon">
-							<div class="content">
-								<h2>{thesis.title}</h2>
-								<f:format.raw>{thesis.description}</f:format.raw>
-							</div>
-						</div>
-						<div class="row d-flex align-items-center">
-							<div class="col col-auto mr-auto">
-								<span class="d-flex align-items-center emphasize-toggle-wrap">
-									<span class="emphasize-toggle mr-1">
-										<input
-											type="checkbox"
-											id="emphasize-toggle-{step}"
-											class="checkbox-star"
-											value="1"
-											onchange="$('#emphasize-{step}').prop('checked', this.checked);"
-											{f:if(condition: '{opinion.emphasize}', then: ' checked="checked"')}
-										/>
-										<label for="emphasize-toggle-{step}"></label>
+						</f:else>
+					</f:if>
+				</f:for>
+				</div>
+				<div class="row d-flex align-items-center mt-sm-4">
+					<div class="col col-auto mx-auto">
+									<span class="d-flex align-items-center emphasize-toggle-wrap">
+										<span class="emphasize-toggle mr-1">
+											<input
+												type="checkbox"
+												id="emphasize-toggle-{step}"
+												class="checkbox-star"
+												value="1"
+												onchange="$('#emphasize-{step}').prop('checked', this.checked);"
+												{f:if(condition: '{opinion.emphasize}', then: ' checked="checked"')}
+											/>
+											<label for="emphasize-toggle-{step}"></label>
+										</span>
+										<span onclick="$(this).prev().children('input').click();" class="emphasize-toggle-label">Diese These ist mir besonders wichtig und zählt doppelt</span>
 									</span>
-									<span onclick="$(this).prev().children('input').click();" class="emphasize-toggle-label">Diese These ist mir besonders wichtig und zählt doppelt</span>
-								</span>
-							</div>
-							<div class="col col-auto ml-auto hidden-xs-down">
-								<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-									<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-									<f:form.hidden name="resultObject[opinions][{step}][emphasize]" value="0" />
-									<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
-										These überspringen
-										<i class="fi flaticon-arrow2"></i>
-									</f:form.button>
-								</f:form>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row my-3">
-				<div class="col-12">
-					<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-						<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-						<f:form.checkbox id="emphasize-{step}" class="invisible" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]" />
-						<div class="row">
-							<div class="col-12 col-sm-4 d-flex">
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
-									<span class="d-flex align-items-center">
-										ich stimme zu
-										<span class="opinion-wrap">
-											<i class="fi flaticon-check"></i>
+		</div>
+	</div>
+	<div class="row my-3">
+		<div class="col-12">
+			<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
+				<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{currentThesis.uid}"/>
+				<f:form.checkbox id="emphasize-{step}" class="invisible" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]"/>
+				<div class="row">
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+						<f:form.button id="btn-agree" class="btn btn-lg btn-block btn-secondary btn-agree{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
+										<span class="d-flex align-items-center justify-content-center">
+											<span class="opinion-wrap">
+												<i class="fi flaticon-check"></i>
+											</span>
+											<span class="hidden-lg-down">ich stimme zu</span>
 										</span>
-									</span>
-								</f:form.button>
-							</div>
-							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
-									<span class="d-flex align-items-center">
-										ich stimme nicht zu
-										<span class="opinion-wrap">
-											<i class="fi flaticon-cancel"></i>
+						</f:form.button>
+					</div>
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+						<f:form.button id="btn-disagree" class="btn btn-lg btn-block btn-secondary btn-disagree{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
+										<span class="d-flex align-items-center justify-content-center">
+											<span class="opinion-wrap">
+												<i class="fi flaticon-cancel"></i>
+											</span>
+											<span class="hidden-lg-down">ich stimme nicht zu</span>
 										</span>
-									</span>
-								</f:form.button>
-							</div>
-							<div class="col-12 col-sm-4 mt-3 mt-sm-0">
-								<f:form.button class="btn btn-lg btn-block btn-secondary{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
-									<span class="d-flex align-items-center">
-										neutral
-										<span class="opinion-wrap">
-											<i class="fi flaticon-minus"></i>
+						</f:form.button>
+					</div>
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+						<f:form.button id="btn-draw" class="btn btn-lg btn-block btn-secondary btn-draw{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
+										<span class="d-flex align-items-center justify-content-center">
+											<span class="opinion-wrap">
+												<i class="fi flaticon-minus"></i>
+											</span>
+											<span class="hidden-lg-down">neutral</span>
 										</span>
-									</span>
-								</f:form.button>
-							</div>
-						</div>
-					</f:form>
-					<div class="row justify-content-center mt-3">
-						<div class="col col-auto mr-auto mr-md-0">
-							<f:render partial="Sharing/Thesis" arguments="{text: 'These teilen', electionDistrict: electionDistrict, election: election, thesis: thesis}"/>
-						</div>
-						<div class="col col-auto hidden-md-up ml-auto">
-							<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
-								<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{thesis.uid}" />
-								<f:form.hidden name="resultObject[opinions][{step}][emphasize]" value="0" />
-								<f:form.button class="skip-thesis float-right" name="resultObject[opinions][{step}][opinion]" value="0">
-									These überspringen
-									<i class="fi flaticon-arrow2"></i>
-								</f:form.button>
-							</f:form>
-						</div>
+						</f:form.button>
+					</div>
+					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+						<f:form.button id="btn-skip" class="btn btn-lg btn-block btn-secondary btn-skip" name="resultObject[opinions][{step}][opinion]" value="0">
+										<span class="d-flex align-items-center justify-content-center">
+											<span class="opinion-wrap">
+												<i class="fi flaticon-arrow2"></i>
+											</span>
+											<span class="hidden-lg-down">überspringen</span>
+										</span>
+						</f:form.button>
 					</div>
 				</div>
-			</div>
-		</f:if>
-	</f:for>
+			</f:form>
+		</div>
+	</div>
 </html>
