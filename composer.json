@@ -4,7 +4,7 @@
 	"description": "Kandidat-O-Mat",
 	"homepage": "https://www.digitalpatrioten.com/",
 	"license": ["GPL-2.0+"],
-	"version": "1.3.0-DEV",
+	"version": "1.3.0",
 	"autoload": {
 		"psr-4": {
 			"DigitalPatrioten\\Kom\\": "Classes/"
