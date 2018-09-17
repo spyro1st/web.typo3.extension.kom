@@ -1,65 +1,84 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-04T12:07:16Z" product-name="kom">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-04T12:07:16Z" product-name="kom" target-language="de">
 		<header/>
 		<body>
 			<trans-unit id="tx_kom_domain_model_pi1">
 				<source>Kandidat-O-Mat</source>
+				<target>Kandidat-O-Mat</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_pi1.description">
 				<source>Kandidat-O-Mat</source>
+				<target>Kandidat-O-Mat</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_electiondistrict">
 				<source>Election District</source>
+				<target>Election District</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_electiondistrict.title">
 				<source>Title</source>
+				<target>Title</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_electiondistrict.description">
 				<source>Description</source>
+				<target>Description</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_electiondistrict.elections">
 				<source>Elections</source>
+				<target>Elections</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_election">
 				<source>Election</source>
+				<target>Election</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_election.title">
 				<source>Title</source>
+				<target>Title</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_election.date">
 				<source>Date</source>
+				<target>Date</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_election.theses">
 				<source>Theses</source>
+				<target>Theses</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate">
 				<source>Candidate</source>
+				<target>Candidate</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.title">
 				<source>Title</source>
+				<target>Title</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.first_name">
 				<source>First Name</source>
+				<target>First Name</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.last_name">
 				<source>Last Name</source>
+				<target>Last Name</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.image">
 				<source>Image</source>
+				<target>Image</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate.elections">
 				<source>Elections</source>
+				<target>Elections</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis">
 				<source>Thesis</source>
+				<target>Thesis</target>
 			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_thesis.description">
 				<source>Description</source>
+				<target>Description</target>
 			</trans-unit>
 
 			<trans-unit id="selector.electionDistrict">
 				<source>Choose district</source>
+				<target>Wahlkreis wählen</target>
 			</trans-unit>
 		</body>
 	</file>
