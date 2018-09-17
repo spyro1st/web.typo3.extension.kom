@@ -13,7 +13,7 @@
 							</f:then>
 							<f:else>
 								<div class="select-wrap">
-									<f:form.select additionalAttributes="{onchange: 'if(this.value != 0) { this.form.submit(); }'}" name="electionDistrict" class="form-control" options="{electionDistricts}" optionLabelField="title" prependOptionLabel="Wahlkreis wählen" prependOptionValue=""></f:form.select>
+									<f:form.select additionalAttributes="{onchange: 'if(this.value != 0) { this.form.submit(); }'}" name="electionDistrict" class="form-control" options="{electionDistricts}" optionLabelField="title" prependOptionLabel="{f:translate(key:'selector.electionDistrict')}" prependOptionValue=""></f:form.select>
 								</div>
 							</f:else>
 						</f:if>
