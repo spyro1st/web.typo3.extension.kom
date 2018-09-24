@@ -44,7 +44,7 @@
 						</f:form>
 					</f:comment>
 				</f:if>
-				<div class="row justify-content-center mt-3 mb-4 mb-sm-5">
+				<div class="row justify-content-center mt-1 mb-1 mb-sm-5">
 					<div class="col mr-auto">
 						<div class="thesis-counter text-left">
 							These <strong>{step}</strong> von {totalSteps}
@@ -104,13 +104,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="row my-3">
+	<div class="row mb-3">
 		<div class="col-12">
 			<f:form additionalParams="{tx_kom_pi1: '{electionDistrict: electionDistrict, election: election, step: nextStep}'}" object="{resultObject}" objectName="resultObject">
 				<f:form.hidden name="resultObject[opinions][{step}][uidLocal]" value="{currentThesis.uid}"/>
 				<f:form.checkbox id="emphasize-{step}" class="invisible" value="1" checked="{opinion.emphasize}" name="resultObject[opinions][{step}][emphasize]"/>
 				<div class="row">
-					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3">
 						<f:form.button id="btn-disagree" class="btn btn-lg btn-block btn-secondary btn-disagree{f:if(condition: '{opinion.opinion} == -1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="-1">
 										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
@@ -120,7 +120,7 @@
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3">
 						<f:form.button id="btn-draw" class="btn btn-lg btn-block btn-secondary btn-draw{f:if(condition: '{opinion.opinion} == 1', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="1">
 										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
@@ -130,7 +130,7 @@
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3">
 						<f:form.button id="btn-skip" class="btn btn-lg btn-block btn-secondary btn-skip" name="resultObject[opinions][{step}][opinion]" value="0">
 										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">
@@ -140,7 +140,7 @@
 										</span>
 						</f:form.button>
 					</div>
-					<div class="col-3 col-sm-3 mt-3 mt-sm-0">
+					<div class="col-3 col-sm-3">
 						<f:form.button id="btn-agree" class="btn btn-lg btn-block btn-secondary btn-agree{f:if(condition: '{opinion.opinion} == 2', then: ' active')}" name="resultObject[opinions][{step}][opinion]" value="2">
 										<span class="d-flex align-items-center justify-content-center">
 											<span class="opinion-wrap">

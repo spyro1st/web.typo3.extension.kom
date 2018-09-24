@@ -39,6 +39,9 @@
 			<trans-unit id="tx_kom_domain_model_election.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_kom_domain_model_election.logos">
+				<source>Logos</source>
+			</trans-unit>
 			<trans-unit id="tx_kom_domain_model_candidate">
 				<source>Candidate</source>
 			</trans-unit>

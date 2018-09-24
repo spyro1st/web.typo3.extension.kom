@@ -53,7 +53,7 @@ CREATE TABLE tx_kom_domain_model_election (
 	date int(11) DEFAULT '0' NOT NULL,
 	electiondistricts int(11) unsigned DEFAULT '0' NOT NULL,
 	description mediumtext,
-	logos mediumtext,
+	logos int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
