@@ -179,15 +179,26 @@ return [
             'defaultExtras' => 'richtext:rte_transform[flag=rte_enabled|mode=ts]'
         ],
         'logos' => [
-            'l10n_mode' => 'prefixLangTitle',
-            'l10n_cat' => 'text',
-            'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.ALT.html_formlabel',
+            'label' => 'LLL:EXT:kom/Resources/Private/Language/locallang_db.xlf:tx_kom_domain_model_election.logos',
             'config' => [
-                'type' => 'text',
-                'renderType' => 't3editor',
-                'format' => 'html',
-                'cols' => '80',
-                'rows' => '15'
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tt_content',
+                'foreign_table' => 'tt_content',
+                'foreign_sortby' => 'sorting',
+                'minitems' => 0,
+                'maxitems' => 99,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => false,
+                    ],
+                ],
             ]
         ],
     ],

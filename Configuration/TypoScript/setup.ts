@@ -105,6 +105,13 @@ module.tx_kom_web_komoverview {
   }
 }
 
+lib.kom.contentElementRendering = RECORDS
+lib.kom.contentElementRendering {
+  tables = tt_content
+  source.current = 1
+  dontCheckPid = 1
+}
+
 lib.kom.navigation = USER
 lib.kom.navigation {
   userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
